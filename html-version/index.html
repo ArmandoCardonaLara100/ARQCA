@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARQCA — Reynaldo Cardona Guerrero | Estudio de Arquitectura</title>
+<meta name="description" content="ARQCA es el estudio de arquitectura de Reynaldo Cardona Guerrero — diseño residencial, comercial e interior definido por la precisión, la luz y una forma moderna atemporal.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23222831%22/><text x=%2250%22 y=%2266%22 font-size=%2255%22 font-family=%22Georgia,serif%22 fill=%22%23F1EFEC%22 text-anchor=%22middle%22>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  ARQCA — SITIO WEB (versión HTML plano, sin frameworks)
+  ═══════════════════════════════════════════════════════════════════
+
+  CÓMO EDITAR ESTE SITIO
+  -----------------------
+  1. TEXTOS: todo el texto está directamente en el HTML de abajo.
+     Busca la sección que quieras cambiar (están marcadas con
+     comentarios como el de "SECCIÓN: HERO") y edita el texto entre
+     las etiquetas <h1>, <p>, etc.
+
+  2. IMÁGENES: hay dos tipos —
+     a) Imágenes reales ya cargadas (la Galería usa las 8 fotos en
+        la carpeta /images). Para cambiarlas, reemplaza el archivo
+        en /images conservando el mismo nombre, o edita el atributo
+        src="images/tu-foto.jpg" del <img> correspondiente.
+     b) Marcadores de posición (Hero, Retrato, Proyectos) — verás
+        una caja punteada con una etiqueta. Justo arriba de cada una
+        hay un comentario que dice exactamente qué <img> pegar para
+        reemplazarla.
+
+  3. COLORES: todos los colores están definidos como variables al
+     inicio del <style> de abajo (busca ":root"). Cambia un valor
+     ahí y se actualiza en todo el sitio.
+
+  4. CONTACTO: tu teléfono, WhatsApp, Instagram y correo aparecen en
+     dos lugares — la sección de Contacto y el pie de página. Están
+     marcados con comentarios "EDITAR:" para que los encuentres fácil.
+
+  5. NO necesitas instalar nada ni usar la terminal. Simplemente abre
+     este archivo (index.html) con doble clic para verlo en tu
+     navegador, o edítalo con cualquier editor de texto.
+  ═══════════════════════════════════════════════════════════════════
+-->
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   VARIABLES DE DISEÑO — cambia estos valores para actualizar
+   colores, tipografía y espaciado en todo el sitio.
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --ink: #222831;        /* fondo principal */
+  --graphite: #393E46;   /* fondo secundario (tarjetas) */
+  --paper: #F1EFEC;      /* texto principal */
+  --accent: #000000;     /* acento oscuro */
+  --ivory: #F2EFE7;      /* acento cálido — botones y estados activos */
+
+  --paper-70: rgba(241, 239, 236, 0.70);
+  --paper-60: rgba(241, 239, 236, 0.60);
+  --paper-50: rgba(241, 239, 236, 0.50);
+  --paper-45: rgba(241, 239, 236, 0.45);
+  --paper-35: rgba(241, 239, 236, 0.35);
+  --paper-25: rgba(241, 239, 236, 0.25);
+  --paper-15: rgba(241, 239, 236, 0.15);
+  --paper-10: rgba(241, 239, 236, 0.10);
+  --paper-5:  rgba(241, 239, 236, 0.05);
+
+  --font-body: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Manrope', ui-sans-serif, sans-serif;
+
+  --ease: cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════ */
+* { box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body {
+  margin: 0;
+  background-color: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+ul { list-style: none; margin: 0; padding: 0; }
+img { max-width: 100%; display: block; }
+::selection { background: var(--paper); color: var(--ink); }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+@media (min-width: 640px) {
+  .container { padding: 0 32px; }
+}
+
+.section {
+  padding: 96px 20px;
+  scroll-margin-top: 96px;
+}
+@media (min-width: 640px) {
+  .section { padding: 128px 32px; }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-60);
+}
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--paper-70);
+  flex-shrink: 0;
+}
+.section-heading {
+  max-width: 640px;
+}
+.section-heading.center {
+  margin: 0 auto;
+  text-align: center;
+}
+.section-heading h2 {
+  margin-top: 16px;
+  font-size: 32px;
+  font-weight: 500;
+}
+.section-heading p {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--paper-60);
+}
+@media (min-width: 640px) {
+  .section-heading h2 { font-size: 40px; }
+  .section-heading p { font-size: 18px; }
+}
+@media (min-width: 1024px) {
+  .section-heading h2 { font-size: 48px; }
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+  background: var(--ivory);
+  color: var(--ink);
+}
+.btn-primary:hover {
+  background: rgba(242, 239, 231, 0.9);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--paper-25);
+  color: var(--paper);
+}
+.btn-secondary:hover {
+  border-color: var(--paper-60);
+  background: var(--paper-5);
+}
+.icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* Marcadores de posición para imágenes ------------------------- */
+.img-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(57, 62, 70, 0.5);
+  background-image:
+    linear-gradient(var(--paper-5) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-5) 1px, transparent 1px);
+  background-size: 32px 32px;
+  overflow: hidden;
+}
+.img-placeholder.align-bottom-left {
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 24px;
+}
+.ph-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 0 24px;
+  position: relative;
+}
+.img-placeholder.align-bottom-left .ph-content {
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  padding: 0;
+}
+.ph-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-15);
+  background: rgba(34, 40, 49, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ph-icon svg { width: 20px; height: 20px; color: var(--paper-50); }
+.ph-label { font-size: 14px; font-weight: 500; color: var(--paper-60); }
+.ph-hint { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper-35); margin-top: 2px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL (fade + slide up al entrar en pantalla)
+   ═══════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+.stagger.is-visible > *:nth-child(1) { transition-delay: 0s; }
+.stagger.is-visible > *:nth-child(2) { transition-delay: 0.08s; }
+.stagger.is-visible > *:nth-child(3) { transition-delay: 0.16s; }
+.stagger.is-visible > *:nth-child(4) { transition-delay: 0.24s; }
+.stagger.is-visible > *:nth-child(5) { transition-delay: 0.32s; }
+.stagger.is-visible > *:nth-child(6) { transition-delay: 0.4s; }
+.stagger.is-visible > *:nth-child(7) { transition-delay: 0.48s; }
+.stagger.is-visible > *:nth-child(8) { transition-delay: 0.56s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════════ */
+header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+}
+.header-bar {
+  position: relative;
+  z-index: 50;
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  transition: all 0.5s ease;
+  border: 1px solid transparent;
+  background: transparent;
+}
+.header-bar.scrolled {
+  margin-top: 12px;
+  max-width: 1120px;
+  border-radius: 999px;
+  border-color: var(--paper-10);
+  background: rgba(34, 40, 49, 0.7);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+@media (min-width: 640px) { .header-bar { padding: 0 32px; } }
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.main-nav { display: none; }
+@media (min-width: 1024px) {
+  .main-nav {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.main-nav ul { display: flex; align-items: center; gap: 4px; }
+.main-nav a {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--paper-70);
+  transition: all 0.3s ease;
+}
+.main-nav a:hover { background: var(--paper-5); color: var(--paper); }
+
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.header-cta {
+  display: none;
+  border-radius: 999px;
+  background: var(--ivory);
+  color: var(--ink);
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+.header-cta:hover { background: rgba(242,239,231,0.9); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+@media (min-width: 640px) { .header-cta { display: inline-flex; } }
+
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-15);
+  background: transparent;
+  color: var(--paper);
+  transition: background 0.3s ease;
+}
+.menu-toggle:hover { background: var(--paper-5); }
+@media (min-width: 1024px) { .menu-toggle { display: none; } }
+.menu-toggle svg { width: 20px; height: 20px; }
+.menu-toggle .icon-close { display: none; }
+.menu-toggle.open .icon-menu { display: none; }
+.menu-toggle.open .icon-close { display: block; }
+
+/* Menú móvil */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(34,40,49,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+@media (min-width: 1024px) { .mobile-menu { display: none; } }
+.mobile-menu a {
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--paper-80, rgba(241,239,236,0.8));
+  transition: color 0.3s ease;
+}
+.mobile-menu a:hover { color: var(--paper); }
+.mobile-menu .header-cta { display: inline-flex; margin-top: 24px; }
+body.menu-open { overflow: hidden; }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 96px 16px 64px;
+  text-align: center;
+}
+@media (min-width: 640px) { .hero { padding-left: 24px; padding-right: 24px; } }
+.hero-bg {
+  position: absolute;
+  inset: 12px;
+  border-radius: 32px;
+  overflow: hidden;
+}
+@media (min-width: 640px) { .hero-bg { inset: 20px; border-radius: 40px; } }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.2));
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-content .eyebrow { color: var(--paper-70); }
+.hero-content h1 {
+  margin-top: 24px;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.08;
+}
+@media (min-width: 640px) { .hero-content h1 { font-size: 60px; } }
+@media (min-width: 1024px) { .hero-content h1 { font-size: 72px; } }
+.hero-content .subtitle {
+  margin-top: 24px;
+  max-width: 560px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--paper-70);
+}
+@media (min-width: 640px) { .hero-content .subtitle { font-size: 18px; } }
+.hero-actions {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+@media (min-width: 640px) { .hero-actions { flex-direction: row; } }
+.hero-actions .btn-secondary { backdrop-filter: blur(4px); }
+.scroll-cue {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: none;
+}
+@media (min-width: 640px) { .scroll-cue { display: block; } }
+.scroll-cue span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-25);
+  background: rgba(34,40,49,0.3);
+  backdrop-filter: blur(4px);
+  animation: bob 2s ease-in-out infinite;
+}
+.scroll-cue svg { width: 16px; height: 16px; color: var(--paper-70); }
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ABOUT
+   ═══════════════════════════════════════════════════════════════ */
+.about-grid {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .about-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
+}
+.about-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 32px;
+  overflow: hidden;
+  order: 2;
+}
+@media (min-width: 1024px) { .about-portrait { max-width: none; order: 1; } }
+.about-text { order: 1; }
+@media (min-width: 1024px) { .about-text { order: 2; } }
+.about-text h2 {
+  margin-top: 16px;
+  font-size: 32px;
+  font-weight: 500;
+}
+@media (min-width: 640px) { .about-text h2 { font-size: 40px; } }
+@media (min-width: 1024px) { .about-text h2 { font-size: 48px; } }
+.about-role {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-50);
+}
+.about-bio { margin-top: 32px; }
+.about-bio p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--paper-70);
+}
+@media (min-width: 640px) { .about-bio p { font-size: 18px; } }
+.about-bio p + p { margin-top: 20px; }
+.specialties {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.specialty-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--paper-10);
+  background: rgba(57,62,70,0.4);
+  padding: 16px 20px;
+  transition: border-color 0.3s ease;
+}
+.specialty-item:hover { border-color: var(--paper-25); }
+.specialty-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.specialty-icon svg { width: 16px; height: 16px; color: var(--paper-80, rgba(241,239,236,0.8)); }
+.specialty-item span.label { font-size: 15px; font-weight: 500; color: rgba(241,239,236,0.85); }
+
+/* ═══════════════════════════════════════════════════════════════
+   SERVICIOS
+   ═══════════════════════════════════════════════════════════════ */
+.services-grid {
+  margin-top: 64px;
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 640px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .services-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.service-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid var(--paper-10);
+  background: rgba(57,62,70,0.4);
+  padding: 32px;
+  transition: all 0.5s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--paper-25);
+  background: rgba(57,62,70,0.6);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+.service-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease;
+}
+.service-card:hover .service-icon { transform: scale(1.1); }
+.service-icon svg { width: 22px; height: 22px; color: rgba(241,239,236,0.85); }
+.service-card h3 { margin-top: 24px; font-size: 20px; font-weight: 500; }
+.service-card p { margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--paper-60); }
+
+/* ═══════════════════════════════════════════════════════════════
+   PROYECTOS
+   ═══════════════════════════════════════════════════════════════ */
+.projects-grid {
+  margin-top: 64px;
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 768px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+.project-card {
+  overflow: hidden;
+  border-radius: 32px;
+  border: 1px solid var(--paper-10);
+  background: rgba(57,62,70,0.3);
+  transition: all 0.5s ease;
+}
+.project-card:hover { border-color: var(--paper-25); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+.project-image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.project-image-wrap .img-placeholder,
+.project-image-wrap img { transition: transform 0.7s ease; }
+.project-card:hover .project-image-wrap .img-placeholder,
+.project-card:hover .project-image-wrap img { transform: scale(1.05); }
+.project-tag {
+  position: absolute;
+  top: 20px;
+  border-radius: 999px;
+  border: 1px solid var(--paper-15);
+  background: rgba(34,40,49,0.6);
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(241,239,236,0.9);
+  backdrop-filter: blur(6px);
+}
+.project-tag.category { left: 20px; }
+.project-tag.year { right: 20px; text-transform: none; }
+.project-body { padding: 28px; }
+@media (min-width: 640px) { .project-body { padding: 32px; } }
+.project-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.project-head h3 { font-size: 24px; font-weight: 500; }
+.project-head .location { margin-top: 6px; font-size: 14px; color: var(--paper-50); }
+.project-arrow {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+.project-card:hover .project-arrow {
+  transform: rotate(45deg);
+  border-color: rgba(242,239,231,0.5);
+  background: var(--ivory);
+  color: var(--ink);
+}
+.project-arrow svg { width: 18px; height: 18px; }
+.project-desc { margin-top: 16px; font-size: 14px; line-height: 1.6; color: var(--paper-60); }
+
+/* ═══════════════════════════════════════════════════════════════
+   GALERÍA
+   ═══════════════════════════════════════════════════════════════ */
+.gallery-wrap { max-width: 1024px; margin: 0 auto; }
+.gallery-viewport {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  border: 1px solid var(--paper-10);
+  margin-top: 64px;
+}
+@media (min-width: 640px) { .gallery-viewport { border-radius: 40px; } }
+.gallery-track {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+@media (min-width: 640px) { .gallery-track { aspect-ratio: 16 / 9; } }
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+.slide.active { opacity: 1; visibility: visible; z-index: 1; }
+.slide img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+
+.gallery-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-15, rgba(241,239,236,0.2));
+  background: rgba(34,40,49,0.5);
+  color: var(--paper);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.gallery-nav-btn:hover { transform: translateY(-50%) scale(1.05); background: rgba(34,40,49,0.8); }
+.gallery-nav-btn.prev { left: 16px; }
+.gallery-nav-btn.next { right: 16px; }
+@media (min-width: 640px) { .gallery-nav-btn.prev { left: 24px; } .gallery-nav-btn.next { right: 24px; } }
+.gallery-nav-btn svg { width: 20px; height: 20px; }
+
+.gallery-top-controls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+}
+@media (min-width: 640px) { .gallery-top-controls { top: 24px; right: 24px; } }
+.gallery-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-15, rgba(241,239,236,0.2));
+  background: rgba(34,40,49,0.5);
+  color: var(--paper);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+.gallery-icon-btn:hover { background: rgba(34,40,49,0.8); }
+.gallery-icon-btn svg { width: 16px; height: 16px; }
+.gallery-icon-btn .icon-pause { display: block; }
+.gallery-icon-btn .icon-play { display: none; }
+.gallery-icon-btn.paused .icon-pause { display: none; }
+.gallery-icon-btn.paused .icon-play { display: block; }
+
+.gallery-dots { margin-top: 28px; display: flex; justify-content: center; gap: 10px; }
+.gallery-dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 999px;
+  border: none;
+  background: var(--paper-25);
+  transition: all 0.4s ease;
+}
+.gallery-dot:hover { background: var(--paper-50); }
+.gallery-dot.active { width: 32px; background: var(--ivory); }
+
+/* Lightbox pantalla completa */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 16px;
+}
+@media (min-width: 640px) { .lightbox { padding: 40px; } }
+.lightbox.open { display: flex; }
+.lightbox-image-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1152px;
+  aspect-ratio: 16 / 9;
+  border-radius: 24px;
+  overflow: hidden;
+}
+.lightbox-image-wrap img { width: 100%; height: 100%; object-fit: contain; }
+.lightbox-close, .lightbox-prev, .lightbox-next {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-25);
+  background: rgba(34,40,49,0.6);
+  color: var(--paper);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { background: var(--ink); }
+.lightbox-close { top: 20px; right: 20px; }
+.lightbox-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 16px; top: 50%; transform: translateY(-50%); }
+@media (min-width: 640px) { .lightbox-prev { left: 32px; } .lightbox-next { right: 32px; } }
+.lightbox-close svg, .lightbox-prev svg, .lightbox-next svg { width: 20px; height: 20px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   ESTADÍSTICAS
+   ═══════════════════════════════════════════════════════════════ */
+.stats-outer { padding: 48px 20px; }
+@media (min-width: 640px) { .stats-outer { padding: 48px 32px; } }
+.stats-box {
+  max-width: 1280px;
+  margin: 0 auto;
+  border-radius: 40px;
+  border: 1px solid var(--paper-10);
+  background: rgba(57,62,70,0.4);
+  padding: 56px 24px;
+}
+@media (min-width: 640px) { .stats-box { padding: 64px 48px; } }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+@media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+.stat-item { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.stat-number { font-family: var(--font-display); font-size: 40px; font-weight: 500; font-variant-numeric: tabular-nums; }
+@media (min-width: 640px) { .stat-number { font-size: 48px; } }
+@media (min-width: 1024px) { .stat-number { font-size: 56px; } }
+.stat-label { font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-50); }
+@media (min-width: 640px) { .stat-label { font-size: 14px; } }
+
+/* ═══════════════════════════════════════════════════════════════
+   TESTIMONIOS
+   ═══════════════════════════════════════════════════════════════ */
+.testimonials-grid { margin-top: 64px; display: grid; gap: 20px; }
+@media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+.testimonial-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  border: 1px solid var(--paper-10);
+  background: rgba(57,62,70,0.4);
+  padding: 32px;
+  transition: all 0.5s ease;
+}
+.testimonial-card:hover { transform: translateY(-6px); border-color: var(--paper-25); }
+.testimonial-card svg.quote-icon { width: 28px; height: 28px; color: var(--paper-25); }
+.testimonial-quote { margin-top: 20px; flex: 1; font-size: 14px; line-height: 1.6; color: var(--paper-60); font-style: italic; }
+.testimonial-author { margin-top: 28px; display: flex; align-items: center; gap: 16px; }
+.testimonial-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--paper-15); background: var(--ink);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.testimonial-avatar svg { width: 18px; height: 18px; color: var(--paper-50); }
+.testimonial-name { font-size: 14px; font-weight: 700; }
+.testimonial-role { font-size: 12px; color: var(--paper-45); margin-top: 2px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   CONTACTO
+   ═══════════════════════════════════════════════════════════════ */
+.contact-grid {
+  margin: 64px auto 0;
+  max-width: 620px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  row-gap: 48px;
+  column-gap: 32px;
+}
+@media (min-width: 640px) { .contact-grid { max-width: 680px; grid-template-columns: repeat(4, 1fr); column-gap: 16px; margin-top: 80px; } }
+.contact-btn { display: flex; flex-direction: column; align-items: center; gap: 16px; cursor: pointer; }
+.contact-circle {
+  position: relative;
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-10);
+  background: rgba(57,62,70,0.5);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+}
+@media (min-width: 640px) { .contact-circle { width: 112px; height: 112px; } }
+.contact-btn:hover .contact-circle,
+.contact-btn:focus-visible .contact-circle {
+  transform: scale(1.05);
+  border-color: var(--paper-25);
+  background: rgba(57,62,70,0.7);
+}
+.contact-circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--paper-10);
+  opacity: 0;
+  filter: blur(16px);
+  transition: opacity 0.3s ease;
+}
+.contact-btn:hover .contact-circle::before { opacity: 1; }
+.contact-circle svg { position: relative; width: 32px; height: 32px; color: rgba(241,239,236,0.85); transition: color 0.3s ease; }
+@media (min-width: 640px) { .contact-circle svg { width: 36px; height: 36px; } }
+.contact-btn:hover .contact-circle svg { color: var(--paper); }
+.contact-btn-label { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: var(--paper-70); transition: color 0.3s ease; }
+.contact-btn:hover .contact-btn-label { color: var(--paper); }
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--paper-10);
+  padding: 48px 20px;
+}
+@media (min-width: 640px) { footer { padding: 48px 32px; } }
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+@media (min-width: 640px) { .footer-inner { flex-direction: row; } }
+.footer-brand { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+@media (min-width: 640px) { .footer-brand { align-items: flex-start; } }
+.footer-logo { font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: 0.18em; }
+.footer-copy { font-size: 12px; color: var(--paper-35); }
+.footer-actions { display: flex; align-items: center; gap: 12px; }
+.footer-socials { display: flex; align-items: center; gap: 8px; }
+.footer-social-link {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--paper-15);
+  color: var(--paper-70);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+}
+.footer-social-link:hover { border-color: var(--paper-50); color: var(--paper); }
+.footer-social-link svg { width: 16px; height: 16px; }
+.footer-divider { width: 1px; height: 24px; background: var(--paper-10); margin: 0 4px; }
+.back-to-top {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--ivory); color: var(--ink);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+}
+.back-to-top:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+.back-to-top svg { width: 16px; height: 16px; }
+
+/* Foco visible para accesibilidad de teclado */
+:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ENCABEZADO (menú de navegación fijo)
+     ═══════════════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-bar" id="headerBar">
+    <a href="#home" class="logo">ARQCA</a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="#home">Inicio</a></li>
+        <li><a href="#about">Nosotros</a></li>
+        <li><a href="#services">Servicios</a></li>
+        <li><a href="#projects">Proyectos</a></li>
+        <li><a href="#gallery">Galería</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#contact" class="header-cta">Hablemos</a>
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil">
+    <a href="#home">Inicio</a>
+    <a href="#about">Nosotros</a>
+    <a href="#services">Servicios</a>
+    <a href="#projects">Proyectos</a>
+    <a href="#gallery">Galería</a>
+    <a href="#contact">Contacto</a>
+    <a href="#contact" class="header-cta">Hablemos</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="home" class="hero" aria-label="Introducción">
+  <div class="hero-bg">
+    <!--
+      IMAGEN PRINCIPAL — para reemplazar el marcador de abajo, borra
+      el <div class="img-placeholder">...</div> completo y pega esto
+      en su lugar (ajusta el nombre del archivo):
+
+      <img src="images/hero.jpg" alt="Fachada de proyecto ARQCA" style="width:100%;height:100%;object-fit:cover;">
+    -->
+    <div class="img-placeholder align-bottom-left">
+      <div class="ph-content">
+        <span class="ph-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+        </span>
+        <span>
+          <span class="ph-label" style="display:block;">Imagen Principal</span>
+          <span class="ph-hint" style="display:block;">1920 × 1080 · reemplaza aquí</span>
+          <img class="img-placeholder" src="images/house.jpg" alt="Fachada de proyecto ARQCA">
+        </span>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="eyebrow">ARQCA — REYNALDO CARDONA GUERRERO - ARQUITECTO</p>
+    <h1>"CONSTRUYENDO SUEÑOS"</h1>
+    <p class="subtitle">Espacios precisos, únicos, inigualables — diseñados con intención, construidos con dedicación.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">
+        Ver Proyectos
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-secondary">Contáctame</a>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-cue" aria-label="Desplázate a la sección Nosotros">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></span>
+  </a>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: NOSOTROS / ACERCA DE
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="about" class="section" aria-label="Acerca del arquitecto">
+  <div class="container about-grid">
+    <div class="about-portrait reveal">
+      <!--
+        RETRATO DEL ARQUITECTO — reemplaza el marcador de abajo con:
+        <img src="images/portrait.jpg" alt="Reynaldo Cardona Guerrero" style="width:100%;height:100%;object-fit:cover;">
+      -->
+      <div class="img-placeholder">
+        <div class="ph-content">
+          <span class="ph-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+          </span>
+          <span class="ph-label">Retrato del Arquitecto</span>
+          <span class="ph-hint">1200 × 1500 · reemplaza aquí</span>
+          <img class="img-placeholder" src="images/arquitecto.jpg" alt="Reynaldo Cardona Guerrero">
+        </div>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <div class="reveal">
+        <p class="eyebrow">Quiénes Somos</p>
+        <h2>Reynaldo Cardona Guerrero</h2>
+        <p class="about-role">Arquitecto Fundador — ARQCA</p>
+      </div>
+
+      <div class="about-bio reveal">
+        <p>Más de 20 años de experiencia respaldan una trayectoria dedicada al diseño y desarrollo de proyectos arquitectónicos de alta calidad. Egresado de la Universidad La Salle Bajío en León, Guanajuato, con Licenciatura en Arquitectura y Maestría en Diseño Arquitectónico.</p>
+        <p>Especializado en el diseño y ejecución de una amplia variedad de proyectos, incluyendo viviendas residenciales, edificios comerciales, naves industriales, remodelaciones, diseño de interiores, ampliaciones y soluciones arquitectónicas personalizadas, adaptadas a las necesidades de cada cliente.</p>
+      </div>
+
+      <div class="specialties stagger">
+        <div class="specialty-item">
+          <span class="specialty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
+          <span class="label">Diseño residencial y comercial moderno</span>
+        </div>
+        <div class="specialty-item">
+          <span class="specialty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg></span>
+          <span class="label">Detalle preciso y honestidad en los materiales</span>
+        </div>
+        <div class="specialty-item">
+          <span class="specialty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
+          <span class="label">Cada detalle diseñado con precisión</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: SERVICIOS
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="services" class="section" aria-label="Servicios">
+  <div class="container">
+    <div class="section-heading center reveal">
+      <p class="eyebrow" style="justify-content:center;">Servicios</p>
+      <h2>Todo lo que un proyecto necesita, bajo una sola visión</h2>
+      <p>Desde el primer boceto hasta la última visita de obra — una práctica integral construida sobre la claridad, el oficio y la responsabilidad.</p>
+    </div>
+
+    <div class="services-grid stagger">
+      <article class="service-card">
+        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        <h3>Diseño Residencial</h3>
+        <p>Creamos espacios habitables que combinan funcionalidad, confort y estética, adaptándonos al estilo de vida y las necesidades de cada familia.</p>
+      </article>
+      <article class="service-card">
+        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="6" x2="9" y2="6"/><line x1="15" y1="6" x2="15" y2="6"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/><line x1="9" y1="14" x2="9" y2="14"/><line x1="15" y1="14" x2="15" y2="14"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+        <h3>Diseño Industrial</h3>
+        <p>Desarrollamos proyectos para naves industriales, bodegas y espacios de producción, optimizando la distribución, la eficiencia operativa y el cumplimiento de normativas.</p>
+      </article>
+      <article class="service-card">
+        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v.5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M4 18v2"/><path d="M20 18v2"/></svg></span>
+        <h3>Diseño de Mobiliario</h3>
+        <p>Diseñamos mobiliario personalizado que integra funcionalidad, ergonomía y diseño, aprovechando al máximo cada espacio y reflejando el estilo del proyecto.</p>
+      </article>
+      <article class="service-card">
+        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg></span>
+        <h3>Diseño Comercial</h3>
+        <p>Diseñamos locales, oficinas y espacios comerciales que fortalecen la identidad de cada negocio y mejoran la experiencia de clientes y colaboradores.</p>
+      </article>
+      <article class="service-card">
+        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg></span>
+        <h3>Diseño Urbano</h3>
+        <p>Planeamos y diseñamos espacios públicos y entornos urbanos que promueven la movilidad, la integración social y el desarrollo sostenible de las comunidades.</p>
+      </article>
+      <article class="service-card">
+        <span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V8a2 2 0 0 1 2-2v0a2 2 0 0 1 2 2v2"/><path d="M4 10h16v6H4z"/><path d="M6 14h.01"/><path d="M18 14h.01"/></svg></span>
+        <h3>Proyecto Ejecutivo</h3>
+        <p>Elaboramos la documentación técnica completa para la construcción, incluyendo planos, detalles, especificaciones y procesos necesarios para ejecutar la obra con precisión.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: PROYECTOS
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="projects" class="section" aria-label="Proyectos seleccionados">
+  <div class="container">
+    <div class="section-heading center reveal">
+      <p class="eyebrow" style="justify-content:center;">Trabajo Seleccionado</p>
+      <h2>Proyectos Construidos</h2>
+      <p>Una selección de trabajo residencial, comercial - que refleja la filosofía de diseño y atención al detalle que define mi trabajo.</p>
+    </div>
+
+    <div class="projects-grid stagger">
+
+      <!-- Proyecto 1 — para poner una foto real, reemplaza el
+           .img-placeholder de abajo con:
+           <img src="images/proyecto-casa-vela.jpg" alt="Casa Vela" style="width:100%;height:100%;object-fit:cover;"> -->
+      <article class="project-card">
+        <div class="project-image-wrap">
+          <div class="img-placeholder">
+            <div class="ph-content">
+              <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+              <span class="ph-label">Imagen del Proyecto — Residencial Vallejo</span>
+              <span class="ph-hint">1600 × 1000</span>
+              <img class="img-placeholder" src="images/vallejo.jpg" alt="Residencial Vallejo">
+            </div>
+          </div>
+          <span class="project-tag category">Residencial</span>
+          <span class="project-tag year">2024</span>
+        </div>
+        <div class="project-body">
+          <div class="project-head">
+            <div>
+              <h3>Residencial Vallejo</h3>
+              <p class="location">San Miguel de Allende, MX</p>
+            </div>
+            <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </div>
+          <p class="project-desc">Una residencia en ladera de volúmenes en voladizo, que enmarca el valle a través de cristales de piso a techo.</p>
+        </div>
+      </article>
+
+      <!-- Proyecto 2 -->
+      <article class="project-card">
+        <div class="project-image-wrap">
+          <div class="img-placeholder">
+            <div class="ph-content">
+              <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+              <span class="ph-label">Imagen del Proyecto — Residencial Padilla</span>
+              <span class="ph-hint">1600 × 1000</span>
+              <img class="img-placeholder" src="images/padilla.jpg" alt="Residencial Padilla">
+            </div>
+          </div>
+          <span class="project-tag category">Residencial</span>
+          <span class="project-tag year">2022</span>
+        </div>
+        <div class="project-body">
+          <div class="project-head">
+            <div>
+              <h3>Residencial Padilla</h3>
+              <p class="location">Lagos de Moreno, Jalisco, MX</p>
+            </div>
+            <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </div>
+          <p class="project-desc">Una vivienda moderna de gran tamaño y lujosa. Totalmente adaptada a las necesidades del cliente y su familia.</p>
+        </div>
+      </article>
+
+      <!-- Proyecto 3 -->
+      <article class="project-card">
+        <div class="project-image-wrap">
+          <div class="img-placeholder">
+            <div class="ph-content">
+              <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+              <span class="ph-label">Imagen del Proyecto — Centro de Capacitación de Kasai Mexicana</span>
+              <span class="ph-hint">1600 × 1000</span>
+              <img class="img-placeholder" src="images/kasai.jpg" alt="Centro de Capacitación de Kasai Mexicana">
+            </div>
+          </div>
+          <span class="project-tag category">Ejecutivo</span>
+          <span class="project-tag year">2017</span>
+        </div>
+        <div class="project-body">
+          <div class="project-head">
+            <div>
+              <h3>Centro de Capacitación de Kasai Mexicana</h3>
+              <p class="location">León Guanajuato, MX</p>
+            </div>
+            <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </div>
+          <p class="project-desc">Un centro de capacitación moderno que integra espacios de aprendizaje y áreas de recreación para la comunidad.</p>
+        </div>
+      </article>
+
+      <!-- Proyecto 4 -->
+      <article class="project-card">
+        <div class="project-image-wrap">
+          <div class="img-placeholder">
+            <div class="ph-content">
+              <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+              <span class="ph-label">Imagen del Proyecto — Residencial Mayorca</span>
+              <span class="ph-hint">1600 × 1000</span>
+              <img class="img-placeholder" src="images/luani.jpeg" alt="Residencial Mayorca">
+            </div>
+          </div>
+          <span class="project-tag category">Residencial</span>
+          <span class="project-tag year">2026</span>
+        </div>
+        <div class="project-body">
+          <div class="project-head">
+            <div>
+              <h3>Casa Luani</h3>
+              <p class="location">León Guanajuato, MX</p>
+            </div>
+            <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </div>
+          <p class="project-desc">Un pabellón público de planos de concreto plegado que alberga exposiciones, encuentros y cine al aire libre.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: GALERÍA
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="gallery" class="section" aria-label="Galería de imágenes">
+  <div class="container gallery-wrap">
+    <div class="section-heading center reveal">
+      <p class="eyebrow" style="justify-content:center;">Galería</p>
+      <h2>Velarias y Andador Universitario</h2>
+      <p>Fragmentos de la obra construida de la Universidad UNIVA, León Guanajuato, MX. Participación con Constructora ARQUIA en la elaboración 
+        del diseño arquitectónico y proyecto ejecutivo.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <!--
+        Para AGREGAR o CAMBIAR fotos de la galería: cada foto es un
+        bloque <div class="slide">...</div> de abajo. Para cambiar
+        una imagen, edita su atributo src="images/tu-foto.jpg".
+        Puedes tener hasta 8 fotos (el primer "slide" debe tener la
+        clase "active").
+      -->
+      <div class="gallery-viewport" id="galleryViewport">
+        <div class="gallery-track" id="galleryTrack">
+          <div class="slide active" data-index="0"><img src="images/imagen1.jpg" alt="Galería 01 — Velarias y andador universitario" onclick="openLightbox(0)"></div>
+          <div class="slide" data-index="1"><img src="images/imagen2.jpg" alt="Galería 02 — Velarias y andador universitario" onclick="openLightbox(1)"></div>
+          <div class="slide" data-index="2"><img src="images/imagen3.jpg" alt="Galería 03 — Velarias y andador universitario" onclick="openLightbox(2)"></div>
+          <div class="slide" data-index="3"><img src="images/imagen4.jpg" alt="Galería 04 — Velarias y andador universitario" onclick="openLightbox(3)"></div>
+          <div class="slide" data-index="4"><img src="images/imagen5.jpg" alt="Galería 05 — Velarias y andador universitario" onclick="openLightbox(4)"></div>
+          <div class="slide" data-index="5"><img src="images/imagen6.jpg" alt="Galería 06 — Velarias y andador universitario" onclick="openLightbox(5)"></div>
+          <div class="slide" data-index="6"><img src="images/imagen7.jpg" alt="Galería 07 — Velarias y andador universitario" onclick="openLightbox(6)"></div>
+          <div class="slide" data-index="7"><img src="images/imagen8.jpg" alt="Galería 08 — Velarias y andador universitario" onclick="openLightbox(7)"></div>
+        </div>
+
+        <button type="button" class="gallery-nav-btn prev" onclick="galleryPrev()" aria-label="Imagen anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="gallery-nav-btn next" onclick="galleryNext()" aria-label="Imagen siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <div class="gallery-top-controls">
+          <button type="button" class="gallery-icon-btn" id="autoplayBtn" onclick="toggleAutoplay()" aria-label="Pausar presentación" aria-pressed="true">
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            <svg class="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+          <button type="button" class="gallery-icon-btn" onclick="openLightbox(currentSlide)" aria-label="Abrir imagen en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="gallery-dots" id="galleryDots" role="tablist" aria-label="Paginación de galería">
+        <button type="button" class="gallery-dot active" onclick="goToSlide(0)" role="tab" aria-selected="true" aria-label="Ir a la imagen 1"></button>
+        <button type="button" class="gallery-dot" onclick="goToSlide(1)" role="tab" aria-selected="false" aria-label="Ir a la imagen 2"></button>
+        <button type="button" class="gallery-dot" onclick="goToSlide(2)" role="tab" aria-selected="false" aria-label="Ir a la imagen 3"></button>
+        <button type="button" class="gallery-dot" onclick="goToSlide(3)" role="tab" aria-selected="false" aria-label="Ir a la imagen 4"></button>
+        <button type="button" class="gallery-dot" onclick="goToSlide(4)" role="tab" aria-selected="false" aria-label="Ir a la imagen 5"></button>
+        <button type="button" class="gallery-dot" onclick="goToSlide(5)" role="tab" aria-selected="false" aria-label="Ir a la imagen 6"></button>
+        <button type="button" class="gallery-dot" onclick="goToSlide(6)" role="tab" aria-selected="false" aria-label="Ir a la imagen 7"></button>
+        <button type="button" class="gallery-dot" onclick="goToSlide(7)" role="tab" aria-selected="false" aria-label="Ir a la imagen 8"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox de pantalla completa para la galería -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista en pantalla completa" onclick="if(event.target===this) closeLightbox()">
+  <div class="lightbox-image-wrap">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+  <button type="button" class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar vista en pantalla completa">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button type="button" class="lightbox-prev" onclick="event.stopPropagation(); galleryPrev(); syncLightbox();" aria-label="Imagen anterior">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button type="button" class="lightbox-next" onclick="event.stopPropagation(); galleryNext(); syncLightbox();" aria-label="Imagen siguiente">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: ESTADÍSTICAS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="stats-outer" aria-label="Estadísticas del estudio">
+  <div class="stats-box">
+    <div class="stats-grid stagger">
+      <div class="stat-item">
+        <span class="stat-number" data-target="100" data-suffix="+">0+</span>
+        <span class="stat-label">Proyectos Completados</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="20" data-suffix="+">0+</span>
+        <span class="stat-label">Años de Experiencia</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="50" data-suffix="+">0+</span>
+        <span class="stat-label">Clientes Satisfechos</span>
+      </div>
+      <img class="stats-bg" src="images/logo.png" alt="Imagen de fondo de estadísticas">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: TESTIMONIOS
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="testimonials" class="section" aria-label="Testimonios de clientes">
+  <div class="container">
+    <div class="section-heading center reveal">
+      <p class="eyebrow" style="justify-content:center;">Testimonios</p>
+      <h2>Lo que dicen los Clientes</h2>
+    </div>
+
+    <div class="testimonials-grid stagger">
+      <figure class="testimonial-card">
+        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+        <blockquote class="testimonial-quote">&ldquo;El testimonio del cliente aparecerá aquí. Unas líneas sobre la experiencia de trabajar con ARQCA y el resultado obtenido.&rdquo;</blockquote>
+        <figcaption class="testimonial-author">
+          <span class="testimonial-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>
+          <span>
+            <span class="testimonial-name" style="display:block;">Nombre del Cliente</span>
+            <span class="testimonial-role" style="display:block;">Proyecto Residencial</span>
+          </span>
+        </figcaption>
+      </figure>
+
+      <figure class="testimonial-card">
+        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+        <blockquote class="testimonial-quote">&ldquo;El testimonio del cliente aparecerá aquí. Unas líneas sobre la experiencia de trabajar con ARQCA y el resultado obtenido.&rdquo;</blockquote>
+        <figcaption class="testimonial-author">
+          <span class="testimonial-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>
+          <span>
+            <span class="testimonial-name" style="display:block;">Nombre del Cliente</span>
+            <span class="testimonial-role" style="display:block;">Proyecto Comercial</span>
+          </span>
+        </figcaption>
+      </figure>
+
+      <figure class="testimonial-card">
+        <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+        <blockquote class="testimonial-quote">&ldquo;El testimonio del cliente aparecerá aquí. Unas líneas sobre la experiencia de trabajar con ARQCA y el resultado obtenido.&rdquo;</blockquote>
+        <figcaption class="testimonial-author">
+          <span class="testimonial-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>
+          <span>
+            <span class="testimonial-name" style="display:block;">Nombre del Cliente</span>
+            <span class="testimonial-role" style="display:block;">Diseño de Interiores</span>
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: CONTACTO
+
+     EDITAR TUS DATOS DE CONTACTO
+     -----------------------------
+     Busca los 4 enlaces "contact-btn" de abajo y cambia:
+       - Teléfono:  href="tel:+520000000000"   y el texto visible si quieres
+       - Correo:    href="mailto:hola@arqca.com"
+       - WhatsApp:  href="https://wa.me/520000000000"  (tu número, sin espacios ni "+")
+       - Instagram: href="https://instagram.com/arqca"
+
+     Estos mismos 4 datos también aparecen en el PIE DE PÁGINA más
+     abajo (Instagram, WhatsApp, Correo) — recuerda actualizarlos ahí también.
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="contact" class="section" aria-label="Contacto">
+  <div class="container">
+    <div class="section-heading center reveal">
+      <p class="eyebrow" style="justify-content:center;">Contacto</p>
+      <h2>Construyendo Sueños</h2>
+      <p>Cuéntanos sobre tu terreno, tus ideas o tus preguntas — respondemos cada mensaje personalmente.</p>
+    </div>
+
+    <div class="contact-grid stagger">
+      <!-- EDITAR: Teléfono -->
+      <a href="tel:+524772663307" class="contact-btn" aria-label="Teléfono">
+        <span class="contact-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+        </span>
+        <span class="contact-btn-label">Teléfono</span>
+      </a>
+
+      <!-- EDITAR: Correo -->
+      <a href="mailto:arqcaconstrucciones@gmail.com" class="contact-btn" aria-label="Correo">
+        <span class="contact-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </span>
+        <span class="contact-btn-label">Correo</span>
+      </a>
+
+      <!-- EDITAR: WhatsApp (usa tu número con código de país, sin espacios) -->
+      <a href="https://wa.me/qr/BRUZZ76XPAZQJ1" target="_blank" rel="noopener noreferrer" class="contact-btn" aria-label="WhatsApp">
+        <span class="contact-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        </span>
+        <span class="contact-btn-label">WhatsApp</span>
+      </a>
+
+      <!-- EDITAR: Instagram -->
+      <a href="https://www.instagram.com/arqcaarquitectura?utm_source=qr&igsh=MXJqN20xZTBpc2N3cQ==" target="_blank" rel="noopener noreferrer" class="contact-btn" aria-label="Instagram">
+        <span class="contact-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </span>
+        <span class="contact-btn-label">Instagram</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PIE DE PÁGINA
+     ═══════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#home" class="footer-logo">ARQCA</a>
+      <p class="footer-copy" id="footerCopy">© 2026 ARQCA — Reynaldo Cardona Guerrero. Todos los derechos reservados.</p>
+    </div>
+
+    <div class="footer-actions">
+      <div class="footer-socials">
+        <!-- EDITAR: mismos enlaces que en Contacto -->
+        <a href="https://www.instagram.com/arqcaarquitectura?utm_source=qr&igsh=MXJqN20xZTBpc2N3cQ==" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </a>
+        <a href="https://wa.me/qr/BRUZZ76XPAZQJ1" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        </a>
+        <a href="mailto:arqcaconstrucciones@gmail.com" class="footer-social-link" aria-label="Correo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+      </div>
+      <span class="footer-divider"></span>
+      <button type="button" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     COMPORTAMIENTO (JavaScript) — no necesitas editar esto para
+     cambiar textos o imágenes. Solo controla animaciones y menús.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+  // Año automático en el pie de página
+  document.getElementById('footerCopy').textContent =
+    '© ' + new Date().getFullYear() + ' ARQCA — Reynaldo Cardona Guerrero. Todos los derechos reservados.';
+
+  // ── Encabezado: fondo difuminado al hacer scroll ──────────────
+  const headerBar = document.getElementById('headerBar');
+  function onScrollHeader() {
+    if (window.scrollY > 12) headerBar.classList.add('scrolled');
+    else headerBar.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', onScrollHeader, { passive: true });
+  onScrollHeader();
+
+  // ── Menú móvil ─────────────────────────────────────────────────
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menú');
+    document.body.classList.remove('menu-open');
+  }
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuToggle.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    document.body.classList.toggle('menu-open', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+  // ── Animaciones al hacer scroll (fade + slide up) ──────────────
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -64px 0px' });
+  document.querySelectorAll('.reveal, .stagger').forEach(el => revealObserver.observe(el));
+
+  // ── Contadores animados (Estadísticas) ──────────────────────────
+  // Usa setInterval (no requestAnimationFrame) para que el conteo
+  // corra de forma confiable incluso si la pestaña está en segundo
+  // plano o no tiene el foco activo.
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1800;
+      const frameMs = 16;
+      const start = Date.now();
+      const timer = setInterval(() => {
+        const progress = Math.min((Date.now() - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress >= 1) clearInterval(timer);
+      }, frameMs);
+      statObserver.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
+
+  // ── Galería: carrusel, autoplay, deslizar (swipe), lightbox ────
+  const slides = Array.from(document.querySelectorAll('#galleryTrack .slide'));
+  const dots = Array.from(document.querySelectorAll('#galleryDots .gallery-dot'));
+  const slideCount = slides.length;
+  let currentSlide = 0;
+  let autoplayTimer = null;
+  let autoplayOn = true;
+
+  function goToSlide(i) {
+    currentSlide = (i + slideCount) % slideCount;
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === currentSlide));
+    dots.forEach((d, idx) => {
+      d.classList.toggle('active', idx === currentSlide);
+      d.setAttribute('aria-selected', String(idx === currentSlide));
+    });
+  }
+  function galleryNext() { goToSlide(currentSlide + 1); }
+  function galleryPrev() { goToSlide(currentSlide - 1); }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(galleryNext, 4500);
+  }
+  function stopAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
+  function toggleAutoplay() {
+    autoplayOn = !autoplayOn;
+    const btn = document.getElementById('autoplayBtn');
+    btn.classList.toggle('paused', !autoplayOn);
+    btn.setAttribute('aria-pressed', String(autoplayOn));
+    btn.setAttribute('aria-label', autoplayOn ? 'Pausar presentación' : 'Reproducir presentación');
+    if (autoplayOn) startAutoplay(); else stopAutoplay();
+  }
+  const galleryViewport = document.getElementById('galleryViewport');
+  galleryViewport.addEventListener('mouseenter', stopAutoplay);
+  galleryViewport.addEventListener('mouseleave', () => { if (autoplayOn) startAutoplay(); });
+  startAutoplay();
+
+  // Deslizar con el dedo (swipe) en móvil
+  let touchStartX = 0;
+  galleryViewport.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  galleryViewport.addEventListener('touchend', (e) => {
+    const delta = e.changedTouches[0].clientX - touchStartX;
+    if (delta < -50) galleryNext();
+    else if (delta > 50) galleryPrev();
+  }, { passive: true });
+
+  // Lightbox de pantalla completa
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  function openLightbox(i) {
+    currentSlide = i;
+    syncLightbox();
+    lightbox.classList.add('open');
+    stopAutoplay();
+  }
+  function syncLightbox() {
+    const img = slides[currentSlide].querySelector('img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    if (autoplayOn) startAutoplay();
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') { galleryNext(); syncLightbox(); }
+    if (e.key === 'ArrowLeft') { galleryPrev(); syncLightbox(); }
+  });
+</script>
+
+</body>
+</html>

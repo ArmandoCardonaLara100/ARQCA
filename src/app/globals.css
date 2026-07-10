@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ── ARQCA palette ─────────────────────────────── */
+  --color-ink: #222831; /* background */
+  --color-graphite: #393e46; /* secondary background */
+  --color-paper: #f1efec; /* primary text */
+  --color-accent: #000000; /* accent */
+  --color-ivory: #f2efe7; /* warm-white surface accent — buttons, active states */
+
+  /* ── Typography ────────────────────────────────── */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-manrope), ui-sans-serif,
+    sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Thin, unobtrusive scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-paper) 20%, transparent)
+    transparent;
+}
+
+/* Visible focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-paper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Architectural blueprint grid used by image placeholders */
+.placeholder-grid {
+  background-image: linear-gradient(
+      color-mix(in srgb, var(--color-paper) 5%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-paper) 5%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}

@@ -149,8 +149,8 @@ export type Testimonial = { quote: string; name: string; role: string };
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "El testimonio del cliente aparecerá aquí. Unas líneas sobre la experiencia de trabajar con ARQCA y el resultado obtenido.",
-    name: "Nombre del Cliente",
+      "Excelente Arquitecto. Desde el diseño hasta la entrega de la casa, todo el proceso fue muy profesional. Siempre estuvo atento a los detalles, cumplió con los tiempos acordados y la calidad de la construcción superó mis expectativas. Lo recomiendo ampliamente por su compromiso, seriedad y excelente servicio. ¡Estamos muy contentos con el Arq Rey!",
+    name: "Casa Luani",
     role: "Proyecto Residencial",
   },
   {

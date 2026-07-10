@@ -682,6 +682,37 @@ body.menu-open { overflow: hidden; }
 .project-arrow svg { width: 18px; height: 18px; }
 .project-desc { margin-top: 16px; font-size: 14px; line-height: 1.6; color: var(--paper-60); }
 
+/* Carrusel de proyectos — reutiliza la estética de la galería.
+   Cada tarjeta tiene su propio slideshow independiente. */
+.project-carousel .p-track { position: absolute; inset: 0; }
+.p-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+.p-slide.active { opacity: 1; visibility: visible; z-index: 1; }
+.p-slide img { width: 100%; height: 100%; object-fit: cover; }
+.p-slide .img-placeholder { width: 100%; height: 100%; }
+/* Flechas: aparecen al pasar el cursor sobre la tarjeta (limpio en desktop);
+   en móvil se usan los puntos y el deslizar con el dedo. */
+.project-carousel .gallery-nav-btn { opacity: 0; }
+.project-card:hover .project-carousel .gallery-nav-btn,
+.project-carousel:hover .gallery-nav-btn { opacity: 1; }
+@media (hover: none) { .project-carousel .gallery-nav-btn { display: none; } }
+.pc-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.pc-dots .gallery-dot { box-shadow: 0 1px 4px rgba(0,0,0,0.45); }
+
 /* ═══════════════════════════════════════════════════════════════
    GALERÍA
    ═══════════════════════════════════════════════════════════════ */
@@ -844,28 +875,43 @@ body.menu-open { overflow: hidden; }
 /* ═══════════════════════════════════════════════════════════════
    TESTIMONIOS
    ═══════════════════════════════════════════════════════════════ */
-.testimonials-grid { margin-top: 64px; display: grid; gap: 20px; }
+.testimonials-grid { margin-top: 56px; display: grid; gap: 24px; }
 @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
 .testimonial-card {
+  margin: 0; /* reset del margen por defecto de <figure> */
   height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 28px;
+  border-radius: 24px;
   border: 1px solid var(--paper-10);
   background: rgba(57,62,70,0.4);
-  padding: 32px;
-  transition: all 0.5s ease;
+  padding: 26px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
-.testimonial-card:hover { transform: translateY(-6px); border-color: var(--paper-25); }
-.testimonial-card svg.quote-icon { width: 28px; height: 28px; color: var(--paper-25); }
-.testimonial-quote { margin-top: 20px; flex: 1; font-size: 14px; line-height: 1.6; color: var(--paper-60); font-style: italic; }
-.testimonial-author { margin-top: 28px; display: flex; align-items: center; gap: 16px; }
+.testimonial-card:hover { transform: translateY(-6px); border-color: var(--paper-25); box-shadow: 0 20px 44px rgba(0,0,0,0.28); }
+.testimonial-card svg.quote-icon { width: 24px; height: 24px; color: var(--paper-25); }
+/* La cita se limita a 6 líneas para que todas las tarjetas queden
+   compactas y del mismo tamaño, sin importar el largo del texto. */
+.testimonial-quote {
+  margin: 14px 0 0; /* reset del margen lateral por defecto de <blockquote> */
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--paper-60);
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
+}
+.testimonial-author { margin-top: auto; padding-top: 22px; display: flex; align-items: center; gap: 14px; }
 .testimonial-avatar {
-  width: 44px; height: 44px; border-radius: 50%;
+  width: 40px; height: 40px; border-radius: 50%;
   border: 1px solid var(--paper-15); background: var(--ink);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.testimonial-avatar svg { width: 18px; height: 18px; color: var(--paper-50); }
+.testimonial-avatar svg { width: 17px; height: 17px; color: var(--paper-50); }
 .testimonial-name { font-size: 14px; font-weight: 700; }
 .testimonial-role { font-size: 12px; color: var(--paper-45); margin-top: 2px; }
 
@@ -1167,19 +1213,52 @@ footer {
 
     <div class="projects-grid stagger">
 
-      <!-- Proyecto 1 — para poner una foto real, reemplaza el
-           .img-placeholder de abajo con:
-           <img src="images/proyecto-casa-vela.jpg" alt="Casa Vela" style="width:100%;height:100%;object-fit:cover;"> -->
+      <!-- Proyecto 1 · CARRUSEL
+           Cada foto es un <div class="p-slide">. El primer slide lleva la
+           clase "active". Para AGREGAR una foto, reemplaza un bloque
+           PLACEHOLDER de abajo por:
+           <div class="p-slide"><img src="images/tu-foto.jpg" alt="Residencial Vallejo — foto N"></div> -->
       <article class="project-card">
-        <div class="project-image-wrap">
-          <div class="img-placeholder">
-            <div class="ph-content">
-              <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-              <span class="ph-label">Imagen del Proyecto — Residencial Vallejo</span>
-              <span class="ph-hint">1600 × 1000</span>
-              <img class="img-placeholder" src="images/vallejo.jpg" alt="Residencial Vallejo">
+        <div class="project-image-wrap project-carousel" data-autoplay="true">
+          <div class="p-track">
+            <div class="p-slide active"><img src="images/vallejo.jpg" alt="Residencial Vallejo — foto 1"></div>
+
+            <!-- SLIDE 2 · PLACEHOLDER — reemplaza por:
+                 <div class="p-slide"><img src="images/vallejo-2.jpg" alt="Residencial Vallejo — foto 2"></div> -->
+            <div class="p-slide">
+              <div class="img-placeholder"><div class="ph-content">
+                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+                <span class="ph-label">Agrega otra foto</span>
+                <span class="ph-hint">1600 × 1000</span>
+                <div class="p-slide"><img src="images/vallejo2.jpg" alt="Residencial Vallejo — foto 2"></div>
+              </div></div>
+            </div>
+
+            <!-- SLIDE 3 · PLACEHOLDER — reemplaza por:
+                 <div class="p-slide"><img src="images/vallejo-3.jpg" alt="Residencial Vallejo — foto 3"></div> -->
+            <div class="p-slide">
+              <div class="img-placeholder"><div class="ph-content">
+                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+                <span class="ph-label">Agrega otra foto</span>
+                <span class="ph-hint">1600 × 1000</span>
+                <div class="p-slide"><img src="images/vallejo3.jpg" alt="Residencial Vallejo — foto 3"></div>
+              </div></div>
             </div>
           </div>
+
+          <button type="button" class="gallery-nav-btn prev pc-prev" aria-label="Foto anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="gallery-nav-btn next pc-next" aria-label="Foto siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+
+          <div class="pc-dots" role="tablist" aria-label="Paginación del proyecto">
+            <button type="button" class="gallery-dot pc-dot active" role="tab" aria-selected="true" aria-label="Ir a la foto 1"></button>
+            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 2"></button>
+            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 3"></button>
+          </div>
+
           <span class="project-tag category">Residencial</span>
           <span class="project-tag year">2024</span>
         </div>
@@ -1191,21 +1270,52 @@ footer {
             </div>
             <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <p class="project-desc">Una residencia en ladera de volúmenes en voladizo, que enmarca el valle a través de cristales de piso a techo.</p>
+          <p class="project-desc">Una residencia en ladera de volúmenes en voladizo, con una vista impresionante desde la alberca exterior.</p>
         </div>
       </article>
 
       <!-- Proyecto 2 -->
       <article class="project-card">
-        <div class="project-image-wrap">
-          <div class="img-placeholder">
-            <div class="ph-content">
-              <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-              <span class="ph-label">Imagen del Proyecto — Residencial Padilla</span>
-              <span class="ph-hint">1600 × 1000</span>
-              <img class="img-placeholder" src="images/padilla.jpg" alt="Residencial Padilla">
+        <div class="project-image-wrap project-carousel" data-autoplay="true">
+          <div class="p-track">
+            <div class="p-slide active"><img src="images/padilla.jpg" alt="Residencial Padilla — foto 1"></div>
+
+            <!-- SLIDE 2 · PLACEHOLDER — reemplaza por:
+                 <div class="p-slide"><img src="images/padilla-2.jpg" alt="Residencial Padilla — foto 2"></div> -->
+            <div class="p-slide">
+              <div class="img-placeholder"><div class="ph-content">
+                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+                <span class="ph-label">Agrega otra foto</span>
+                <span class="ph-hint">1600 × 1000</span>
+                <div class="p-slide"><img src="images/padilla2.jpg" alt="Residencial Padilla — foto 2"></div>
+              </div></div>
+            </div>
+
+            <!-- SLIDE 3 · PLACEHOLDER — reemplaza por:
+                 <div class="p-slide"><img src="images/padilla-3.jpg" alt="Residencial Padilla — foto 3"></div> -->
+            <div class="p-slide">
+              <div class="img-placeholder"><div class="ph-content">
+                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+                <span class="ph-label">Agrega otra foto</span>
+                <span class="ph-hint">1600 × 1000</span>
+                <div class="p-slide"><img src="images/padilla3.jpg" alt="Residencial Padilla — foto 3"></div>
+              </div></div>
             </div>
           </div>
+
+          <button type="button" class="gallery-nav-btn prev pc-prev" aria-label="Foto anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="gallery-nav-btn next pc-next" aria-label="Foto siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+
+          <div class="pc-dots" role="tablist" aria-label="Paginación del proyecto">
+            <button type="button" class="gallery-dot pc-dot active" role="tab" aria-selected="true" aria-label="Ir a la foto 1"></button>
+            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 2"></button>
+            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 3"></button>
+          </div>
+
           <span class="project-tag category">Residencial</span>
           <span class="project-tag year">2022</span>
         </div>
@@ -1223,15 +1333,45 @@ footer {
 
       <!-- Proyecto 3 -->
       <article class="project-card">
-        <div class="project-image-wrap">
-          <div class="img-placeholder">
-            <div class="ph-content">
-              <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-              <span class="ph-label">Imagen del Proyecto — Centro de Capacitación de Kasai Mexicana</span>
-              <span class="ph-hint">1600 × 1000</span>
-              <img class="img-placeholder" src="images/kasai.jpg" alt="Centro de Capacitación de Kasai Mexicana">
+        <div class="project-image-wrap project-carousel" data-autoplay="true">
+          <div class="p-track">
+            <div class="p-slide active"><img src="images/kasai.jpg" alt="Centro de Capacitación de Kasai Mexicana — foto 1"></div>
+
+            <!-- SLIDE 2 · PLACEHOLDER — reemplaza por:
+                 <div class="p-slide"><img src="images/kasai-2.jpg" alt="Kasai — foto 2"></div> -->
+            <div class="p-slide">
+              <div class="img-placeholder"><div class="ph-content">
+                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+                <span class="ph-label">Agrega otra foto</span>
+                <span class="ph-hint">1600 × 1000</span>
+              </div></div>
+            </div>
+
+            <!-- SLIDE 3 · PLACEHOLDER — reemplaza por:
+                 <div class="p-slide"><img src="images/kasai-3.jpg" alt="Kasai — foto 3"></div> -->
+            <div class="p-slide">
+              <div class="img-placeholder"><div class="ph-content">
+                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+                <span class="ph-label">Agrega otra foto</span>
+                <span class="ph-hint">1600 × 1000</span>
+                <div class="p-slide"><img src="images/kasai2.jpg" alt="Kasai — foto 2"></div>
+              </div></div>
             </div>
           </div>
+
+          <button type="button" class="gallery-nav-btn prev pc-prev" aria-label="Foto anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="gallery-nav-btn next pc-next" aria-label="Foto siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+
+          <div class="pc-dots" role="tablist" aria-label="Paginación del proyecto">
+            <button type="button" class="gallery-dot pc-dot active" role="tab" aria-selected="true" aria-label="Ir a la foto 1"></button>
+            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 2"></button>
+            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 3"></button>
+          </div>
+
           <span class="project-tag category">Ejecutivo</span>
           <span class="project-tag year">2017</span>
         </div>
@@ -1249,15 +1389,46 @@ footer {
 
       <!-- Proyecto 4 -->
       <article class="project-card">
-        <div class="project-image-wrap">
-          <div class="img-placeholder">
-            <div class="ph-content">
-              <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-              <span class="ph-label">Imagen del Proyecto — Residencial Mayorca</span>
-              <span class="ph-hint">1600 × 1000</span>
-              <img class="img-placeholder" src="images/luani.jpeg" alt="Residencial Mayorca">
+        <div class="project-image-wrap project-carousel" data-autoplay="true">
+          <div class="p-track">
+            <div class="p-slide active"><img src="images/luani.jpeg" alt="Casa Luani — foto 1"></div>
+
+            <!-- SLIDE 2 · PLACEHOLDER — reemplaza por:
+                 <div class="p-slide"><img src="images/luani-2.jpg" alt="Casa Luani — foto 2"></div> -->
+            <div class="p-slide">
+              <div class="img-placeholder"><div class="ph-content">
+                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+                <span class="ph-label">Agrega otra foto</span>
+                <span class="ph-hint">1600 × 1000</span>
+                <div class="p-slide"><img src="images/luani2.jpeg" alt="Casa Luani — foto 2"></div>
+              </div></div>
+            </div>
+
+            <!-- SLIDE 3 · PLACEHOLDER — reemplaza por:
+                 <div class="p-slide"><img src="images/luani-3.jpg" alt="Casa Luani — foto 3"></div> -->
+            <div class="p-slide">
+              <div class="img-placeholder"><div class="ph-content">
+                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
+                <span class="ph-label">Agrega otra foto</span>
+                <span class="ph-hint">1600 × 1000</span>
+                <div class="p-slide"><img src="images/luani3.jpeg" alt="Casa Luani — foto 3"></div>
+              </div></div>
             </div>
           </div>
+
+          <button type="button" class="gallery-nav-btn prev pc-prev" aria-label="Foto anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="gallery-nav-btn next pc-next" aria-label="Foto siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+
+          <div class="pc-dots" role="tablist" aria-label="Paginación del proyecto">
+            <button type="button" class="gallery-dot pc-dot active" role="tab" aria-selected="true" aria-label="Ir a la foto 1"></button>
+            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 2"></button>
+            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 3"></button>
+          </div>
+
           <span class="project-tag category">Residencial</span>
           <span class="project-tag year">2026</span>
         </div>
@@ -1269,7 +1440,7 @@ footer {
             </div>
             <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
           </div>
-          <p class="project-desc">Un pabellón público de planos de concreto plegado que alberga exposiciones, encuentros y cine al aire libre.</p>
+          <p class="project-desc">Una vivienda contemporánea diseñada a detalle, pensada para el confort y el estilo de vida de la familia que la habita.</p>
         </div>
       </article>
 
@@ -1394,11 +1565,11 @@ footer {
     <div class="testimonials-grid stagger">
       <figure class="testimonial-card">
         <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-        <blockquote class="testimonial-quote">&ldquo;El testimonio del cliente aparecerá aquí. Unas líneas sobre la experiencia de trabajar con ARQCA y el resultado obtenido.&rdquo;</blockquote>
+        <blockquote class="testimonial-quote">&ldquo;Excelente Arquitecto. Desde el diseño hasta la entrega de la casa, todo el proceso fue muy profesional. Siempre estuvo atento a los detalles, cumplió con los tiempos acordados y la calidad de la construcción superó mis expectativas. Lo recomiendo ampliamente por su compromiso, seriedad y excelente servicio. ¡Estamos muy contentos con el Arq Rey!.&rdquo;</blockquote>
         <figcaption class="testimonial-author">
           <span class="testimonial-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>
           <span>
-            <span class="testimonial-name" style="display:block;">Nombre del Cliente</span>
+            <span class="testimonial-name" style="display:block;">CASA LUANI</span>
             <span class="testimonial-role" style="display:block;">Proyecto Residencial</span>
           </span>
         </figcaption>
@@ -1406,12 +1577,12 @@ footer {
 
       <figure class="testimonial-card">
         <svg class="quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-        <blockquote class="testimonial-quote">&ldquo;El testimonio del cliente aparecerá aquí. Unas líneas sobre la experiencia de trabajar con ARQCA y el resultado obtenido.&rdquo;</blockquote>
+        <blockquote class="testimonial-quote">&ldquo;Excelente trabajo, muy profesional, plasmó nuestras ideas en el proyecto, atención personalizada.&rdquo;</blockquote>
         <figcaption class="testimonial-author">
           <span class="testimonial-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>
           <span>
-            <span class="testimonial-name" style="display:block;">Nombre del Cliente</span>
-            <span class="testimonial-role" style="display:block;">Proyecto Comercial</span>
+            <span class="testimonial-name" style="display:block;">RESIDENCIAL PADILLA</span>
+            <span class="testimonial-role" style="display:block;">Proyecto Residencial</span>
           </span>
         </figcaption>
       </figure>
@@ -1666,6 +1837,55 @@ footer {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowRight') { galleryNext(); syncLightbox(); }
     if (e.key === 'ArrowLeft') { galleryPrev(); syncLightbox(); }
+  });
+
+  // ── Carruseles de proyectos ───────────────────────────────────
+  // Cada tarjeta de proyecto tiene su propio slideshow independiente,
+  // con las mismas animaciones que la galería: flechas, puntos,
+  // deslizar (swipe) y autoplay con pausa al pasar el cursor.
+  document.querySelectorAll('.project-carousel').forEach(function (root) {
+    const slides = Array.from(root.querySelectorAll('.p-slide'));
+    const dots = Array.from(root.querySelectorAll('.pc-dot'));
+    if (slides.length <= 1) return;
+
+    let idx = 0;
+    let timer = null;
+    let autoplayOn = root.dataset.autoplay === 'true';
+    const INTERVAL = 5000;
+
+    function go(i) {
+      idx = (i + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle('active', k === idx));
+      dots.forEach((d, k) => {
+        d.classList.toggle('active', k === idx);
+        d.setAttribute('aria-selected', String(k === idx));
+      });
+    }
+    const next = () => go(idx + 1);
+    const prev = () => go(idx - 1);
+    function start() { stop(); if (autoplayOn) timer = setInterval(next, INTERVAL); }
+    function stop() { if (timer) clearInterval(timer); timer = null; }
+
+    const prevBtn = root.querySelector('.pc-prev');
+    const nextBtn = root.querySelector('.pc-next');
+    if (prevBtn) prevBtn.addEventListener('click', prev);
+    if (nextBtn) nextBtn.addEventListener('click', next);
+    dots.forEach((d, k) => d.addEventListener('click', () => go(k)));
+
+    // Pausa el autoplay mientras el cursor está sobre la tarjeta
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', () => { if (autoplayOn) start(); });
+
+    // Deslizar con el dedo (swipe) en móvil
+    let sx = 0;
+    root.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - sx;
+      if (dx < -50) next();
+      else if (dx > 50) prev();
+    }, { passive: true });
+
+    start();
   });
 </script>
 

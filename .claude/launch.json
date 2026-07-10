@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
+    },
+    {
+      "name": "arqca-html",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4100", "--directory", "html-version"],
+      "port": 4100
     }
   ]
 }

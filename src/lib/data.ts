@@ -76,8 +76,15 @@ export type Project = {
   category: string;
   year: string;
   description: string;
-  /** Ruta de la imagen del proyecto en /public/images */
+  /** Imagen destacada (miniatura de la tarjeta) en /public/images */
   src: string;
+  /**
+   * Galería del proyecto — hasta 5 imágenes que aparecen en la ventana
+   * emergente al hacer clic en la flecha de la tarjeta. Cada entrada es la
+   * ruta de una imagen en /public/images; deja "" para un marcador de posición
+   * que podrás reemplazar más adelante por la foto final.
+   */
+  gallery: string[];
 };
 
 export const PROJECTS: Project[] = [
@@ -89,6 +96,8 @@ export const PROJECTS: Project[] = [
     description:
       "Una residencia en ladera de volúmenes en voladizo, que enmarca el valle a través de cristales de piso a techo.",
     src: "/images/vallejo.jpg",
+    // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
+    gallery: ["/images/vallejo.jpg", "", "", "", ""],
   },
   {
     name: "Residencial Padilla",
@@ -97,7 +106,9 @@ export const PROJECTS: Project[] = [
     year: "2022",
     description:
       "Una vivienda moderna de gran tamaño y lujosa. Totalmente adaptada a las necesidades del cliente y su familia.",
-    src: "/images/padilla.jpg",
+    src: "/images/house.jpg",
+    // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
+    gallery: ["/images/house.jpg", "", "", "", ""],
   },
   {
     name: "Centro de Capacitación de Kasai Mexicana",
@@ -107,6 +118,8 @@ export const PROJECTS: Project[] = [
     description:
       "Un centro de capacitación moderno que integra espacios de aprendizaje y áreas de recreación para la comunidad.",
     src: "/images/kasai.jpg",
+    // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
+    gallery: ["/images/kasai.jpg", "", "", "", ""],
   },
   {
     name: "Casa Luani",
@@ -116,6 +129,8 @@ export const PROJECTS: Project[] = [
     description:
       "Una vivienda contemporánea diseñada a detalle, pensada para el confort y el estilo de vida de la familia que la habita.",
     src: "/images/luani.jpeg",
+    // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
+    gallery: ["/images/luani.jpeg", "", "", "", ""],
   },
 ];
 

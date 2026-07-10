@@ -155,9 +155,9 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "El testimonio del cliente aparecerá aquí. Unas líneas sobre la experiencia de trabajar con ARQCA y el resultado obtenido.",
-    name: "Nombre del Cliente",
-    role: "Proyecto Comercial",
+      "Excelente trabajo, muy profesional, plasmó nuestras ideas en el proyecto, atención personalizada.",
+    name: "Residencial Padilla",
+    role: "Proyecto Residencial",
   },
   {
     quote:

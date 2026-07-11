@@ -97,9 +97,7 @@ export const PROJECTS: Project[] = [
     description:
       "Un centro de capacitación moderno que integra espacios de aprendizaje y áreas de recreación para la comunidad.",
     src: "/images/kasai.jpg",
-    // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
-    gallery: ["/images/kasai.jpg", "/images/kasai2.jpg", "", "", ""],
-    // (2 fotos reales + 3 espacios libres)
+    gallery: ["/images/kasai.jpg", "/images/kasai2.jpg"],
   },
   {
     name: "Residencial Padilla",

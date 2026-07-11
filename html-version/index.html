@@ -634,11 +634,17 @@ body.menu-open { overflow: hidden; }
 .project-card:hover { border-color: var(--paper-25); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
 .project-image-wrap {
   position: relative;
+  display: block;
+  width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
 }
 .project-image-wrap .img-placeholder,
-.project-image-wrap img { transition: transform 0.7s ease; }
+.project-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
 .project-card:hover .project-image-wrap .img-placeholder,
 .project-card:hover .project-image-wrap img { transform: scale(1.05); }
 .project-tag {
@@ -668,6 +674,9 @@ body.menu-open { overflow: hidden; }
   height: 44px;
   border-radius: 50%;
   border: 1px solid var(--paper-15);
+  background: none;
+  color: inherit;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -682,36 +691,101 @@ body.menu-open { overflow: hidden; }
 .project-arrow svg { width: 18px; height: 18px; }
 .project-desc { margin-top: 16px; font-size: 14px; line-height: 1.6; color: var(--paper-60); }
 
-/* Carrusel de proyectos — reutiliza la estética de la galería.
-   Cada tarjeta tiene su propio slideshow independiente. */
-.project-carousel .p-track { position: absolute; inset: 0; }
-.p-slide {
+/* Ventana emergente (modal) con la galería de cada proyecto — se abre
+   al hacer clic en la imagen o en la flecha de la tarjeta. Una sola
+   ventana compartida cuyo contenido se rellena según el proyecto. */
+body.project-modal-open { overflow: hidden; }
+.project-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+@media (min-width: 640px) { .project-modal-overlay { padding: 32px; } }
+.project-modal-overlay.open { display: flex; opacity: 1; }
+.project-modal {
+  width: 100%;
+  max-width: 720px;
+  border-radius: 28px;
+  border: 1px solid var(--paper-10);
+  background: var(--graphite);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  overflow: hidden;
+  transform: scale(0.94) translateY(10px);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.32,0.72,0,1), opacity 0.35s ease;
+}
+.project-modal-overlay.open .project-modal { transform: scale(1) translateY(0); opacity: 1; }
+.project-modal-viewport {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--ink);
+  overflow: hidden;
+}
+.pm-track { position: absolute; inset: 0; }
+.pm-slide {
   position: absolute;
   inset: 0;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease;
 }
-.p-slide.active { opacity: 1; visibility: visible; z-index: 1; }
-.p-slide img { width: 100%; height: 100%; object-fit: cover; }
-.p-slide .img-placeholder { width: 100%; height: 100%; }
-/* Flechas: aparecen al pasar el cursor sobre la tarjeta (limpio en desktop);
-   en móvil se usan los puntos y el deslizar con el dedo. */
-.project-carousel .gallery-nav-btn { opacity: 0; }
-.project-card:hover .project-carousel .gallery-nav-btn,
-.project-carousel:hover .gallery-nav-btn { opacity: 1; }
-@media (hover: none) { .project-carousel .gallery-nav-btn { display: none; } }
-.pc-dots {
+.pm-slide.active { opacity: 1; visibility: visible; z-index: 1; }
+.pm-slide img, .pm-slide .img-placeholder { width: 100%; height: 100%; object-fit: cover; }
+.project-modal-close {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 14px;
-  z-index: 5;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-15, rgba(241,239,236,0.2));
+  background: rgba(34,40,49,0.5);
+  color: var(--paper);
+  backdrop-filter: blur(6px);
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
+  transition: background 0.3s ease;
 }
-.pc-dots .gallery-dot { box-shadow: 0 1px 4px rgba(0,0,0,0.45); }
+.project-modal-close:hover { background: rgba(34,40,49,0.8); }
+.project-modal-close svg { width: 18px; height: 18px; }
+.project-modal-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 5;
+  border-radius: 999px;
+  border: 1px solid var(--paper-15);
+  background: rgba(34,40,49,0.6);
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(241,239,236,0.9);
+  backdrop-filter: blur(6px);
+}
+.project-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+}
+@media (min-width: 640px) { .project-modal-footer { padding: 22px 28px; } }
+.project-modal-info h3 { font-size: 18px; font-weight: 500; }
+.project-modal-info p { margin-top: 3px; font-size: 13px; color: var(--paper-50); }
+.project-modal-dots { flex-shrink: 0; display: flex; align-items: center; gap: 8px; }
 
 /* ═══════════════════════════════════════════════════════════════
    GALERÍA
@@ -1213,62 +1287,24 @@ footer {
 
     <div class="projects-grid stagger">
 
-      <!-- Proyecto 1 · CARRUSEL
-           Cada foto es un <div class="p-slide">. El primer slide lleva la
-           clase "active". Para AGREGAR una foto, reemplaza un bloque
-           PLACEHOLDER de abajo por:
-           <div class="p-slide"><img src="images/tu-foto.jpg" alt="Residencial Vallejo — foto N"></div> -->
+      <!-- Proyecto 1 — la imagen y la flecha abren la ventana emergente
+           con la galería completa (ver PROJECT_GALLERIES en el <script>
+           al final del archivo, donde se agregan más fotos). -->
       <article class="project-card">
-        <div class="project-image-wrap project-carousel" data-autoplay="true">
-          <div class="p-track">
-            <div class="p-slide active"><img src="images/vallejo.jpg" alt="Residencial Vallejo — foto 1"></div>
-
-            <!-- SLIDE 2 · PLACEHOLDER — reemplaza por:
-                 <div class="p-slide"><img src="images/vallejo-2.jpg" alt="Residencial Vallejo — foto 2"></div> -->
-            <div class="p-slide">
-              <div class="img-placeholder"><div class="ph-content">
-                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-                <span class="ph-label">Agrega otra foto</span>
-                <span class="ph-hint">1600 × 1000</span>
-                <div class="p-slide"><img src="images/vallejo2.jpg" alt="Residencial Vallejo — foto 2"></div>
-              </div></div>
-            </div>
-
-            <!-- SLIDE 3 · PLACEHOLDER — reemplaza por:
-                 <div class="p-slide"><img src="images/vallejo-3.jpg" alt="Residencial Vallejo — foto 3"></div> -->
-            <div class="p-slide">
-              <div class="img-placeholder"><div class="ph-content">
-                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-                <span class="ph-label">Agrega otra foto</span>
-                <span class="ph-hint">1600 × 1000</span>
-                <div class="p-slide"><img src="images/vallejo3.jpg" alt="Residencial Vallejo — foto 3"></div>
-              </div></div>
-            </div>
-          </div>
-
-          <button type="button" class="gallery-nav-btn prev pc-prev" aria-label="Foto anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button type="button" class="gallery-nav-btn next pc-next" aria-label="Foto siguiente">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-
-          <div class="pc-dots" role="tablist" aria-label="Paginación del proyecto">
-            <button type="button" class="gallery-dot pc-dot active" role="tab" aria-selected="true" aria-label="Ir a la foto 1"></button>
-            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 2"></button>
-            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 3"></button>
-          </div>
-
+        <button type="button" class="project-image-wrap" onclick="openProjectModal(0)" aria-label="Ver galería de Residencial Vallejo">
+          <img src="images/vallejo.jpg" alt="Residencial Vallejo">
           <span class="project-tag category">Residencial</span>
           <span class="project-tag year">2024</span>
-        </div>
+        </button>
         <div class="project-body">
           <div class="project-head">
             <div>
               <h3>Residencial Vallejo</h3>
               <p class="location">San Miguel de Allende, MX</p>
             </div>
-            <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+            <button type="button" class="project-arrow" onclick="openProjectModal(0)" aria-label="Ver galería de Residencial Vallejo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </button>
           </div>
           <p class="project-desc">Una residencia en ladera de volúmenes en voladizo, con una vista impresionante desde la alberca exterior.</p>
         </div>
@@ -1276,56 +1312,20 @@ footer {
 
       <!-- Proyecto 2 -->
       <article class="project-card">
-        <div class="project-image-wrap project-carousel" data-autoplay="true">
-          <div class="p-track">
-            <div class="p-slide active"><img src="images/house.jpg" alt="Residencial Padilla — foto 1"></div>
-
-            <!-- SLIDE 2 · PLACEHOLDER — reemplaza por:
-                 <div class="p-slide"><img src="images/padilla-2.jpg" alt="Residencial Padilla — foto 2"></div> -->
-            <div class="p-slide">
-              <div class="img-placeholder"><div class="ph-content">
-                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-                <span class="ph-label">Agrega otra foto</span>
-                <span class="ph-hint">1600 × 1000</span>
-                <div class="p-slide"><img src="images/padilla2.jpg" alt="Residencial Padilla — foto 2"></div>
-              </div></div>
-            </div>
-
-            <!-- SLIDE 3 · PLACEHOLDER — reemplaza por:
-                 <div class="p-slide"><img src="images/padilla-3.jpg" alt="Residencial Padilla — foto 3"></div> -->
-            <div class="p-slide">
-              <div class="img-placeholder"><div class="ph-content">
-                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-                <span class="ph-label">Agrega otra foto</span>
-                <span class="ph-hint">1600 × 1000</span>
-                <div class="p-slide"><img src="images/padilla3.jpg" alt="Residencial Padilla — foto 3"></div>
-              </div></div>
-            </div>
-          </div>
-
-          <button type="button" class="gallery-nav-btn prev pc-prev" aria-label="Foto anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button type="button" class="gallery-nav-btn next pc-next" aria-label="Foto siguiente">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-
-          <div class="pc-dots" role="tablist" aria-label="Paginación del proyecto">
-            <button type="button" class="gallery-dot pc-dot active" role="tab" aria-selected="true" aria-label="Ir a la foto 1"></button>
-            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 2"></button>
-            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 3"></button>
-          </div>
-
+        <button type="button" class="project-image-wrap" onclick="openProjectModal(1)" aria-label="Ver galería de Residencial Padilla">
+          <img src="images/house.jpg" alt="Residencial Padilla">
           <span class="project-tag category">Residencial</span>
           <span class="project-tag year">2022</span>
-        </div>
+        </button>
         <div class="project-body">
           <div class="project-head">
             <div>
               <h3>Residencial Padilla</h3>
               <p class="location">Lagos de Moreno, Jalisco, MX</p>
             </div>
-            <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+            <button type="button" class="project-arrow" onclick="openProjectModal(1)" aria-label="Ver galería de Residencial Padilla">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </button>
           </div>
           <p class="project-desc">Una vivienda moderna de gran tamaño y lujosa. Totalmente adaptada a las necesidades del cliente y su familia.</p>
         </div>
@@ -1333,55 +1333,20 @@ footer {
 
       <!-- Proyecto 3 -->
       <article class="project-card">
-        <div class="project-image-wrap project-carousel" data-autoplay="true">
-          <div class="p-track">
-            <div class="p-slide active"><img src="images/kasai.jpg" alt="Centro de Capacitación de Kasai Mexicana — foto 1"></div>
-
-            <!-- SLIDE 2 · PLACEHOLDER — reemplaza por:
-                 <div class="p-slide"><img src="images/kasai-2.jpg" alt="Kasai — foto 2"></div> -->
-            <div class="p-slide">
-              <div class="img-placeholder"><div class="ph-content">
-                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-                <span class="ph-label">Agrega otra foto</span>
-                <span class="ph-hint">1600 × 1000</span>
-              </div></div>
-            </div>
-
-            <!-- SLIDE 3 · PLACEHOLDER — reemplaza por:
-                 <div class="p-slide"><img src="images/kasai-3.jpg" alt="Kasai — foto 3"></div> -->
-            <div class="p-slide">
-              <div class="img-placeholder"><div class="ph-content">
-                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-                <span class="ph-label">Agrega otra foto</span>
-                <span class="ph-hint">1600 × 1000</span>
-                <div class="p-slide"><img src="images/kasai2.jpg" alt="Kasai — foto 2"></div>
-              </div></div>
-            </div>
-          </div>
-
-          <button type="button" class="gallery-nav-btn prev pc-prev" aria-label="Foto anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button type="button" class="gallery-nav-btn next pc-next" aria-label="Foto siguiente">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-
-          <div class="pc-dots" role="tablist" aria-label="Paginación del proyecto">
-            <button type="button" class="gallery-dot pc-dot active" role="tab" aria-selected="true" aria-label="Ir a la foto 1"></button>
-            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 2"></button>
-            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 3"></button>
-          </div>
-
+        <button type="button" class="project-image-wrap" onclick="openProjectModal(2)" aria-label="Ver galería de Centro de Capacitación de Kasai Mexicana">
+          <img src="images/kasai.jpg" alt="Centro de Capacitación de Kasai Mexicana">
           <span class="project-tag category">Ejecutivo</span>
           <span class="project-tag year">2017</span>
-        </div>
+        </button>
         <div class="project-body">
           <div class="project-head">
             <div>
               <h3>Centro de Capacitación de Kasai Mexicana</h3>
               <p class="location">León Guanajuato, MX</p>
             </div>
-            <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+            <button type="button" class="project-arrow" onclick="openProjectModal(2)" aria-label="Ver galería de Centro de Capacitación de Kasai Mexicana">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </button>
           </div>
           <p class="project-desc">Un centro de capacitación moderno que integra espacios de aprendizaje y áreas de recreación para la comunidad.</p>
         </div>
@@ -1389,56 +1354,20 @@ footer {
 
       <!-- Proyecto 4 -->
       <article class="project-card">
-        <div class="project-image-wrap project-carousel" data-autoplay="true">
-          <div class="p-track">
-            <div class="p-slide active"><img src="images/luani.jpeg" alt="Casa Luani — foto 1"></div>
-
-            <!-- SLIDE 2 · PLACEHOLDER — reemplaza por:
-                 <div class="p-slide"><img src="images/luani-2.jpg" alt="Casa Luani — foto 2"></div> -->
-            <div class="p-slide">
-              <div class="img-placeholder"><div class="ph-content">
-                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-                <span class="ph-label">Agrega otra foto</span>
-                <span class="ph-hint">1600 × 1000</span>
-                <div class="p-slide"><img src="images/luani2.jpeg" alt="Casa Luani — foto 2"></div>
-              </div></div>
-            </div>
-
-            <!-- SLIDE 3 · PLACEHOLDER — reemplaza por:
-                 <div class="p-slide"><img src="images/luani-3.jpg" alt="Casa Luani — foto 3"></div> -->
-            <div class="p-slide">
-              <div class="img-placeholder"><div class="ph-content">
-                <span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>
-                <span class="ph-label">Agrega otra foto</span>
-                <span class="ph-hint">1600 × 1000</span>
-                <div class="p-slide"><img src="images/luani3.jpeg" alt="Casa Luani — foto 3"></div>
-              </div></div>
-            </div>
-          </div>
-
-          <button type="button" class="gallery-nav-btn prev pc-prev" aria-label="Foto anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button type="button" class="gallery-nav-btn next pc-next" aria-label="Foto siguiente">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-
-          <div class="pc-dots" role="tablist" aria-label="Paginación del proyecto">
-            <button type="button" class="gallery-dot pc-dot active" role="tab" aria-selected="true" aria-label="Ir a la foto 1"></button>
-            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 2"></button>
-            <button type="button" class="gallery-dot pc-dot" role="tab" aria-selected="false" aria-label="Ir a la foto 3"></button>
-          </div>
-
+        <button type="button" class="project-image-wrap" onclick="openProjectModal(3)" aria-label="Ver galería de Casa Luani">
+          <img src="images/luani.jpeg" alt="Casa Luani">
           <span class="project-tag category">Residencial</span>
           <span class="project-tag year">2026</span>
-        </div>
+        </button>
         <div class="project-body">
           <div class="project-head">
             <div>
               <h3>Casa Luani</h3>
               <p class="location">León Guanajuato, MX</p>
             </div>
-            <span class="project-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+            <button type="button" class="project-arrow" onclick="openProjectModal(3)" aria-label="Ver galería de Casa Luani">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </button>
           </div>
           <p class="project-desc">Una vivienda contemporánea diseñada a detalle, pensada para el confort y el estilo de vida de la familia que la habita.</p>
         </div>
@@ -1447,6 +1376,37 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- Ventana emergente con la galería de cada proyecto — una sola
+     ventana compartida; su contenido se rellena según el proyecto
+     que se haya abierto (ver PROJECT_GALLERIES en el <script>). -->
+<div class="project-modal-overlay" id="projectModal" role="dialog" aria-modal="true" aria-label="Galería del proyecto" onclick="if(event.target===this) closeProjectModal()">
+  <div class="project-modal" onclick="event.stopPropagation()">
+    <div class="project-modal-viewport" id="projectModalViewport">
+      <div class="pm-track" id="projectModalTrack"></div>
+
+      <button type="button" class="project-modal-close" onclick="closeProjectModal()" aria-label="Cerrar galería">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <button type="button" class="gallery-nav-btn prev" onclick="projectModalPrev()" aria-label="Imagen anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button type="button" class="gallery-nav-btn next" onclick="projectModalNext()" aria-label="Imagen siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <span class="project-modal-badge" id="projectModalCategory"></span>
+    </div>
+
+    <div class="project-modal-footer">
+      <div class="project-modal-info">
+        <h3 id="projectModalName"></h3>
+        <p id="projectModalLocation"></p>
+      </div>
+      <div class="project-modal-dots" id="projectModalDots" role="tablist" aria-label="Paginación de la galería"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════════
      SECCIÓN: GALERÍA
@@ -1839,54 +1799,117 @@ footer {
     if (e.key === 'ArrowLeft') { galleryPrev(); syncLightbox(); }
   });
 
-  // ── Carruseles de proyectos ───────────────────────────────────
-  // Cada tarjeta de proyecto tiene su propio slideshow independiente,
-  // con las mismas animaciones que la galería: flechas, puntos,
-  // deslizar (swipe) y autoplay con pausa al pasar el cursor.
-  document.querySelectorAll('.project-carousel').forEach(function (root) {
-    const slides = Array.from(root.querySelectorAll('.p-slide'));
-    const dots = Array.from(root.querySelectorAll('.pc-dot'));
-    if (slides.length <= 1) return;
-
-    let idx = 0;
-    let timer = null;
-    let autoplayOn = root.dataset.autoplay === 'true';
-    const INTERVAL = 5000;
-
-    function go(i) {
-      idx = (i + slides.length) % slides.length;
-      slides.forEach((s, k) => s.classList.toggle('active', k === idx));
-      dots.forEach((d, k) => {
-        d.classList.toggle('active', k === idx);
-        d.setAttribute('aria-selected', String(k === idx));
-      });
+  // ── Ventana emergente con la galería de cada proyecto ──────────
+  // Al hacer clic en la imagen o en la flecha de una tarjeta se abre
+  // una sola ventana compartida, rellenada con las fotos de ese
+  // proyecto. Para AGREGAR fotos: edita el arreglo "images" de abajo
+  // (hasta 5 por proyecto); usa null para dejar el marcador de
+  // posición hasta que tengas la foto final.
+  const PROJECT_GALLERIES = [
+    {
+      name: 'Residencial Vallejo',
+      location: 'San Miguel de Allende, MX',
+      category: 'Residencial',
+      images: ['images/vallejo.jpg', 'images/vallejo2.jpg', 'images/vallejo3.jpg', null, null]
+    },
+    {
+      name: 'Residencial Padilla',
+      location: 'Lagos de Moreno, Jalisco, MX',
+      category: 'Residencial',
+      images: ['images/house.jpg', 'images/padilla2.jpg', 'images/padilla3.jpg', null, null]
+    },
+    {
+      name: 'Centro de Capacitación de Kasai Mexicana',
+      location: 'León Guanajuato, MX',
+      category: 'Ejecutivo',
+      images: ['images/kasai.jpg', 'images/kasai2.jpg', null, null, null]
+    },
+    {
+      name: 'Casa Luani',
+      location: 'León Guanajuato, MX',
+      category: 'Residencial',
+      images: ['images/luani.jpeg', 'images/luani2.jpeg', 'images/luani3.jpeg', null, null]
     }
-    const next = () => go(idx + 1);
-    const prev = () => go(idx - 1);
-    function start() { stop(); if (autoplayOn) timer = setInterval(next, INTERVAL); }
-    function stop() { if (timer) clearInterval(timer); timer = null; }
+  ];
 
-    const prevBtn = root.querySelector('.pc-prev');
-    const nextBtn = root.querySelector('.pc-next');
-    if (prevBtn) prevBtn.addEventListener('click', prev);
-    if (nextBtn) nextBtn.addEventListener('click', next);
-    dots.forEach((d, k) => d.addEventListener('click', () => go(k)));
+  const projectModal = document.getElementById('projectModal');
+  const projectModalViewport = document.getElementById('projectModalViewport');
+  const projectModalTrack = document.getElementById('projectModalTrack');
+  const projectModalDots = document.getElementById('projectModalDots');
+  const projectModalName = document.getElementById('projectModalName');
+  const projectModalLocation = document.getElementById('projectModalLocation');
+  const projectModalCategory = document.getElementById('projectModalCategory');
+  let pmIndex = 0;
+  let pmSlide = 0;
 
-    // Pausa el autoplay mientras el cursor está sobre la tarjeta
-    root.addEventListener('mouseenter', stop);
-    root.addEventListener('mouseleave', () => { if (autoplayOn) start(); });
+  function pmPlaceholderHTML() {
+    return '<div class="img-placeholder"><div class="ph-content">' +
+      '<span class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="18" x2="15" y2="18"/></svg></span>' +
+      '<span class="ph-label">Agrega otra foto</span>' +
+      '<span class="ph-hint">1600 × 1000</span>' +
+      '</div></div>';
+  }
 
-    // Deslizar con el dedo (swipe) en móvil
-    let sx = 0;
-    root.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
-    root.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - sx;
-      if (dx < -50) next();
-      else if (dx > 50) prev();
-    }, { passive: true });
+  function openProjectModal(index) {
+    const project = PROJECT_GALLERIES[index];
+    pmIndex = index;
+    pmSlide = 0;
 
-    start();
+    projectModalName.textContent = project.name;
+    projectModalLocation.textContent = project.location;
+    projectModalCategory.textContent = project.category;
+
+    projectModalTrack.innerHTML = project.images.map(function (src, i) {
+      const inner = src
+        ? '<img src="' + src + '" alt="' + project.name + ' — foto ' + (i + 1) + '">'
+        : pmPlaceholderHTML();
+      return '<div class="pm-slide' + (i === 0 ? ' active' : '') + '">' + inner + '</div>';
+    }).join('');
+
+    projectModalDots.innerHTML = project.images.map(function (_, i) {
+      return '<button type="button" class="gallery-dot' + (i === 0 ? ' active' : '') +
+        '" role="tab" aria-selected="' + (i === 0) + '" aria-label="Ir a la imagen ' + (i + 1) +
+        '" onclick="pmGoTo(' + i + ')"></button>';
+    }).join('');
+
+    projectModal.classList.add('open');
+    document.body.classList.add('project-modal-open');
+  }
+
+  function closeProjectModal() {
+    projectModal.classList.remove('open');
+    document.body.classList.remove('project-modal-open');
+  }
+
+  function pmGoTo(i) {
+    const count = PROJECT_GALLERIES[pmIndex].images.length;
+    pmSlide = (i + count) % count;
+    const slides = projectModalTrack.querySelectorAll('.pm-slide');
+    const dots = projectModalDots.querySelectorAll('.gallery-dot');
+    slides.forEach((s, k) => s.classList.toggle('active', k === pmSlide));
+    dots.forEach((d, k) => {
+      d.classList.toggle('active', k === pmSlide);
+      d.setAttribute('aria-selected', String(k === pmSlide));
+    });
+  }
+  function projectModalNext() { pmGoTo(pmSlide + 1); }
+  function projectModalPrev() { pmGoTo(pmSlide - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (!projectModal.classList.contains('open')) return;
+    if (e.key === 'Escape') closeProjectModal();
+    if (e.key === 'ArrowRight') projectModalNext();
+    if (e.key === 'ArrowLeft') projectModalPrev();
   });
+
+  // Deslizar con el dedo (swipe) en móvil
+  let pmTouchStartX = 0;
+  projectModalViewport.addEventListener('touchstart', (e) => { pmTouchStartX = e.touches[0].clientX; }, { passive: true });
+  projectModalViewport.addEventListener('touchend', (e) => {
+    const delta = e.changedTouches[0].clientX - pmTouchStartX;
+    if (delta < -50) projectModalNext();
+    else if (delta > 50) projectModalPrev();
+  }, { passive: true });
 </script>
 
 </body>

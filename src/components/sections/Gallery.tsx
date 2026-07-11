@@ -75,7 +75,7 @@ export function Gallery() {
         <SectionHeading
           eyebrow="Galería"
           title="Velarias y Andador Universitario"
-          description="Fragmentos de la obra construida de la Universidad UNIVA, León, Guanajuato, MX. Participación con Constructora ARQUIA en la elaboración del diseño arquitectónico y proyecto ejecutivo."
+          description="Fragmentos de la obra construida de la Universidad UNIVA, León Guanajuato, MX. Participación con Constructora ARQUIA en la elaboración del diseño arquitectónico y proyecto ejecutivo."
         />
 
         <Reveal className="mt-16" delay={0.1}>

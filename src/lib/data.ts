@@ -87,17 +87,19 @@ export type Project = {
   gallery: string[];
 };
 
+// Ordenados cronológicamente, del más antiguo al más reciente.
 export const PROJECTS: Project[] = [
   {
-    name: "Residencial Vallejo",
-    location: "San Miguel de Allende, MX",
-    category: "Residencial",
-    year: "2024",
+    name: "Centro de Capacitación de Kasai Mexicana",
+    location: "León Guanajuato, MX",
+    category: "Ejecutivo",
+    year: "2017",
     description:
-      "Una residencia en ladera de volúmenes en voladizo, que enmarca el valle a través de cristales de piso a techo.",
-    src: "/images/vallejo.jpg",
+      "Un centro de capacitación moderno que integra espacios de aprendizaje y áreas de recreación para la comunidad.",
+    src: "/images/kasai.jpg",
     // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
-    gallery: ["/images/vallejo.jpg", "", "", "", ""],
+    gallery: ["/images/kasai.jpg", "/images/kasai2.jpg", "", "", ""],
+    // (2 fotos reales + 3 espacios libres)
   },
   {
     name: "Residencial Padilla",
@@ -108,29 +110,47 @@ export const PROJECTS: Project[] = [
       "Una vivienda moderna de gran tamaño y lujosa. Totalmente adaptada a las necesidades del cliente y su familia.",
     src: "/images/house.jpg",
     // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
-    gallery: ["/images/house.jpg", "", "", "", ""],
+    gallery: [
+      "/images/house.jpg",
+      "/images/padilla2.jpg",
+      "/images/padilla3.jpg",
+      "/images/padilla4.jpg",
+      "/images/padilla5.jpg",
+    ],
   },
   {
-    name: "Centro de Capacitación de Kasai Mexicana",
-    location: "León, Guanajuato, MX",
-    category: "Ejecutivo",
-    year: "2017",
+    name: "Residencial Vallejo",
+    location: "San Miguel de Allende, MX",
+    category: "Residencial",
+    year: "2024",
     description:
-      "Un centro de capacitación moderno que integra espacios de aprendizaje y áreas de recreación para la comunidad.",
-    src: "/images/kasai.jpg",
+      "Una residencia en ladera de volúmenes en voladizo, con una vista impresionante desde la alberca exterior.",
+    src: "/images/vallejo.jpg",
     // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
-    gallery: ["/images/kasai.jpg", "", "", "", ""],
+    gallery: [
+      "/images/vallejo.jpg",
+      "/images/vallejo2.jpg",
+      "/images/vallejo3.jpg",
+      "/images/vallejo4.jpg",
+      "/images/vallejo5.jpg",
+    ],
   },
   {
     name: "Casa Luani",
-    location: "León, Guanajuato, MX",
+    location: "León Guanajuato, MX",
     category: "Residencial",
     year: "2026",
     description:
       "Una vivienda contemporánea diseñada a detalle, pensada para el confort y el estilo de vida de la familia que la habita.",
     src: "/images/luani.jpeg",
     // 5 espacios: la 1.ª es la foto destacada; reemplaza "" por más fotos.
-    gallery: ["/images/luani.jpeg", "", "", "", ""],
+    gallery: [
+      "/images/luani.jpeg",
+      "/images/luani2.jpeg",
+      "/images/luani3.jpeg",
+      "/images/luani4.jpeg",
+      "/images/luani5.jpeg",
+    ],
   },
 ];
 
@@ -164,14 +184,14 @@ export type Testimonial = { quote: string; name: string; role: string };
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "Excelente Arquitecto. Desde el diseño hasta la entrega de la casa, todo el proceso fue muy profesional. Siempre estuvo atento a los detalles, cumplió con los tiempos acordados y la calidad de la construcción superó mis expectativas. Lo recomiendo ampliamente por su compromiso, seriedad y excelente servicio. ¡Estamos muy contentos con el Arq Rey!",
-    name: "Casa Luani",
+      "Excelente Arquitecto. Desde el diseño hasta la entrega de la casa, todo el proceso fue muy profesional. Siempre estuvo atento a los detalles, cumplió con los tiempos acordados y la calidad de la construcción superó mis expectativas. Lo recomiendo ampliamente por su compromiso, seriedad y excelente servicio. ¡Estamos muy contentos con el Arq Rey!.",
+    name: "CASA LUANI",
     role: "Proyecto Residencial",
   },
   {
     quote:
       "Excelente trabajo, muy profesional, plasmó nuestras ideas en el proyecto, atención personalizada.",
-    name: "Residencial Padilla",
+    name: "RESIDENCIAL PADILLA",
     role: "Proyecto Residencial",
   },
   {

@@ -194,8 +194,8 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "El testimonio del cliente aparecerá aquí. Unas líneas sobre la experiencia de trabajar con ARQCA y el resultado obtenido.",
-    name: "Nombre del Cliente",
-    role: "Diseño de Interiores",
+      "Nuestra casa de los sueños fue diseñada y proyectada por Rey Cardona, quien de manera amable, paciente y atenta fue plasmando lo que ni siquiera nosotros teníamos claro. La idea se fue concretando a lo largo de no menos de 20 sesiones en las que Rey llegó siempre puntual acompañado de los planos que reflejaban claramente las decisiones tomadas en la anterior. Al momento de hacer realidad la construcción los planos ejecutivos nos permitieron realizar la obra sin ningún contratiempo. El resultado fue un hogar cálido, lleno de luz, donde disfrutamos reunirnos con familia y amigos. Gracias Rey!.",
+    name: "RESIDENCIAL VALLEJO",
+    role: "Proyecto Residencial",
   },
 ];

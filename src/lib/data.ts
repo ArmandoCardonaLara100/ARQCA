@@ -198,4 +198,10 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "RESIDENCIAL VALLEJO",
     role: "Proyecto Residencial",
   },
+  {
+    quote:
+      "Muy serio y responsable en todos sus proyectos. Nos ha apoyado desde hace mas de 20 años en diseño de proyectos para fraccionamientos así como en proyectos de diseño de casas y departamentos. Lo recomiendo ampliamente.",
+    name: "DIRECTOR DE ARQUIA SA DE CV",
+    role: "Ing. PabloRodríguez Vázquez",
+  },
 ];

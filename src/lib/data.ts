@@ -202,6 +202,12 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       "Muy serio y responsable en todos sus proyectos. Nos ha apoyado desde hace mas de 20 años en diseño de proyectos para fraccionamientos así como en proyectos de diseño de casas y departamentos. Lo recomiendo ampliamente.",
     name: "DIRECTOR DE ARQUIA SA DE CV",
-    role: "Ing. PabloRodríguez Vázquez",
+    role: "Ing. Pablo Rodríguez Vázquez",
+  },
+  {
+    quote:
+      "Conozco al Arquitecto Reynaldo Cardona Guerrero por mas de 20 años, en el cual me ha tocado transformarse en el arquitecto/diseñador que es actualmente, desde que era estudiante de la carrera al profesional que es hoy, me ha desarrollado y proyectado multiples fraccionamientos por todo el estado de guanajuato, residencias, fabricas, bodegas con un profesionalismo y sencillez que no tiene palabras. Su trabajo es impecable y con mucha responsabilidad. Su idea arquitectonica y de diseño es vanguardia en Leon. Su trato es el de un caballero, siempre dispuesto a escuchar y tratar de entender al cliente..",
+    name: "DIRECTOR DE PROHACE S.A. DE C.V.",
+    role: "Ing. Manuel Vázquez Muñoz",
   },
 ];
